@@ -71,7 +71,6 @@ const historyMessages = (function () {
       messages.shift();
     }
     messages.push({ user, text });
-    console.log(messages);
   };
 
   const free = function (name) {
