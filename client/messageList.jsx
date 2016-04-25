@@ -20,14 +20,14 @@ const MessageList = React.createClass({
   },
   render() {
     return (
-      <ul className="messages" id="messageList" >
+      <ul className="messages" id="messageList" style={{ paddingLeft: '20px' }} >
         {
           this.props.messages.map((message, i) =>
             <Message
               key={i}
               user={message.user}
               text={message.text}
-              />
+            />
           )
         }
       </ul>

@@ -33,7 +33,7 @@ const MessageForm = React.createClass({
       <div className="message_form">
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label for="message">Write New Message</label>
+            <label htmlFor="message">Write New Message</label>
             <input
               type="message"
               className="form-control"

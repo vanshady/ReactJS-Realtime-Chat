@@ -214,7 +214,7 @@ var ChangeNameForm = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { 'for': 'name', style: { marginRight: '10px' } },
+            { htmlFor: 'name', style: { marginRight: '10px' } },
             ' Change Name '
           ),
           React.createElement('input', {
@@ -276,7 +276,7 @@ var MessageForm = React.createClass({
           { className: 'form-group' },
           React.createElement(
             'label',
-            { 'for': 'message' },
+            { htmlFor: 'message' },
             'Write New Message'
           ),
           React.createElement('input', {
@@ -322,7 +322,7 @@ var MessageList = React.createClass({
   render: function render() {
     return React.createElement(
       'ul',
-      { className: 'messages', id: 'messageList' },
+      { className: 'messages', id: 'messageList', style: { paddingLeft: '20px' } },
       this.props.messages.map(function (message, i) {
         return React.createElement(Message, {
           key: i,
