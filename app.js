@@ -19,7 +19,6 @@ const uri = process.env.MONGODB_URI ||
 
 const port = process.env.PORT || 3000;
 
-console.log(process.env);
 /* Configuration */
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));

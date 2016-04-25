@@ -46,7 +46,7 @@ var socket = io.connect();
 var ChatApp = React.createClass({
   displayName: 'ChatApp',
   getInitialState: function getInitialState() {
-    return { users: [], messages: [], text: '' };
+    return { users: [], messages: [], text: '', scrollTop: 0 };
   },
   componentDidMount: function componentDidMount() {
     socket.on('init', this._initialize);
@@ -66,7 +66,7 @@ var ChatApp = React.createClass({
     var messages = this.state.messages;
 
     messages.push(message);
-    this.setState({ messages: messages });
+    this.setState({ messages: messages, scrollTop: document.getElementById('messageList').scrollHeight });
   },
   _userJoined: function _userJoined(data) {
     var _state = this.state;
@@ -301,13 +301,24 @@ module.exports = MessageForm;
 var React = require('react');
 var Message = require('./Message.jsx');
 
+var shouldScrollBottom = void 0;
+
 var MessageList = React.createClass({
   displayName: 'MessageList',
 
   propTypes: {
     messages: React.PropTypes.array
   },
-
+  componentWillUpdate: function componentWillUpdate() {
+    var node = document.getElementById('messageList');
+    shouldScrollBottom = Math.abs(node.scrollTop + node.offsetHeight - node.scrollHeight) < 5;
+  },
+  componentDidUpdate: function componentDidUpdate() {
+    if (shouldScrollBottom) {
+      var node = document.getElementById('messageList');
+      node.scrollTop = node.scrollHeight;
+    }
+  },
   render: function render() {
     return React.createElement(
       'ul',

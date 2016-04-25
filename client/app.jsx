@@ -10,7 +10,7 @@ const socket = io.connect();
 const ChatApp = React.createClass({
 
   getInitialState() {
-    return { users: [], messages: [], text: '' };
+    return { users: [], messages: [], text: '', scrollTop: 0 };
   },
 
   componentDidMount() {
@@ -29,7 +29,7 @@ const ChatApp = React.createClass({
   _messageRecieve(message) {
     const { messages } = this.state;
     messages.push(message);
-    this.setState({ messages });
+    this.setState({ messages, scrollTop: document.getElementById('messageList').scrollHeight });
   },
 
   _userJoined(data) {
