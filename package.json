@@ -2,7 +2,7 @@
   "name": "reactjs-socket-io-chat-app",
   "version": "0.7.0",
   "scripts": {
-    "build": "watchify ./client/app.jsx -v -t [ babelify --presets [ es2015 react ] ] -o 'uglifyjs -cm > public/js/app.js'",
+    "build": "watchify ./client/app.jsx -v -t [ babelify --presets [ es2015 react ] ] -o public/js/app.js",
     "start": "nodemon app.js",
     "test": "npm run build & npm run start"
   },
