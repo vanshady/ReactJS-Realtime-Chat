@@ -282,8 +282,8 @@ var MessageList = React.createClass({
 
   render: function render() {
     return React.createElement(
-      'div',
-      { className: 'messages', style: { marginBottom: '20px' } },
+      'ul',
+      { className: 'messages', id: 'messageList' },
       React.createElement(
         'h2',
         null,

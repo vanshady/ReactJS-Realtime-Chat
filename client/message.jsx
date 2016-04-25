@@ -9,10 +9,10 @@ const Message = React.createClass({
 
   render() {
     return (
-      <div className="message">
+      <li className="message">
         <strong>{this.props.user}: </strong>
         <span>{this.props.text}</span>
-      </div>
+      </li>
     );
   },
 });

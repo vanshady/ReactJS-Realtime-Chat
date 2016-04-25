@@ -9,7 +9,7 @@ const MessageList = React.createClass({
 
   render() {
     return (
-      <div className="messages" style={{ marginBottom: '20px' }} >
+      <ul className="messages" id="messageList">
         <h2> Conversation: </h2>
         {
           this.props.messages.map((message, i) =>
@@ -20,7 +20,7 @@ const MessageList = React.createClass({
               />
             )
           }
-      </div>
+      </ul>
     );
   },
 });

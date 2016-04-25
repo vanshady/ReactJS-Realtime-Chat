@@ -10,8 +10,11 @@ body {
 .messages {
 	margin: 1em;
 	border: 1px solid #ddd;
-	border-radius: 10px; 
+	border-radius: 10px;
+	height: 300px;
 	padding: 1em;
+	overflow: hidden;
+	overflow-y: scroll;
 }
 
 .message_form,
