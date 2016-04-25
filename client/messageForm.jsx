@@ -3,8 +3,8 @@ const React = require('react');
 
 const MessageForm = React.createClass({
   propTypes: {
-    user: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
+    user: React.PropTypes.string,
+    text: React.PropTypes.string,
     onMessageSubmit: React.PropTypes.func.isRequired,
   },
 

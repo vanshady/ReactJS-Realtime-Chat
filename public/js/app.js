@@ -224,8 +224,8 @@ var MessageForm = React.createClass({
   displayName: 'MessageForm',
 
   propTypes: {
-    user: React.PropTypes.string.isRequired,
-    text: React.PropTypes.string.isRequired,
+    user: React.PropTypes.string,
+    text: React.PropTypes.string,
     onMessageSubmit: React.PropTypes.func.isRequired
   },
 
@@ -277,7 +277,7 @@ var MessageList = React.createClass({
   displayName: 'MessageList',
 
   propTypes: {
-    messages: React.PropTypes.array.isRequried
+    messages: React.PropTypes.array
   },
 
   render: function render() {
@@ -295,8 +295,7 @@ var MessageList = React.createClass({
           user: message.user,
           text: message.text
         });
-      }),
-      ') }'
+      })
     );
   }
 });
@@ -312,7 +311,7 @@ var UsersList = React.createClass({
   displayName: "UsersList",
 
   propTypes: {
-    users: React.propTypes.array.isRequired
+    users: React.PropTypes.array.isRequired
   },
 
   render: function render() {

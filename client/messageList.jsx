@@ -4,7 +4,7 @@ const Message = require('./Message.jsx');
 
 const MessageList = React.createClass({
   propTypes: {
-    messages: React.PropTypes.array.isRequried,
+    messages: React.PropTypes.array,
   },
 
   render() {
@@ -19,8 +19,7 @@ const MessageList = React.createClass({
                 text={message.text}
               />
             )
-          })
-        }
+          }
       </div>
     );
   },

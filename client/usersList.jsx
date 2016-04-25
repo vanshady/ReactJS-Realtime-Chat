@@ -3,7 +3,7 @@ const React = require('react');
 
 const UsersList = React.createClass({
   propTypes: {
-    users: React.propTypes.array.isRequired,
+    users: React.PropTypes.array.isRequired,
   },
 
   render() {
