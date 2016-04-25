@@ -14,12 +14,14 @@ const MessageForm = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    const message = {
-      user: this.props.user,
-      text: this.state.text,
-    };
-    this.props.onMessageSubmit(message);
-    this.setState({ text: '' });
+    if (this.state.text) {
+      const message = {
+        user: this.props.user,
+        text: this.state.text,
+      };
+      this.props.onMessageSubmit(message);
+      this.setState({ text: '' });
+    }
   },
 
   changeHandler(e) {
