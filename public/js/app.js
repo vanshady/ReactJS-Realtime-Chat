@@ -13,7 +13,7 @@ var Message = React.createClass({
 
   render: function render() {
     return React.createElement(
-      "div",
+      "li",
       { className: "message" },
       React.createElement(
         "strong",

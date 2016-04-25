@@ -1,8 +1,10 @@
+const Message = require('./message');
+
 // Keep track of which names are used so that there are no duplicates
 const userNames = (function () {
   const names = {};
 
-  const claim = function (name) {
+  const claim = (name) => {
     if (!name || names[name]) {
       return false;
     } else {
@@ -12,7 +14,7 @@ const userNames = (function () {
   };
 
   // find the lowest unused "guest" name and claim it
-  const getGuestName = function () {
+  const getGuestName = () => {
     var name;
     var nextUserId = 1;
 
@@ -25,7 +27,7 @@ const userNames = (function () {
   };
 
   // serialize claimed names as an array
-  const get = function () {
+  const get = () => {
     const res = [];
     for (user in names) {
       res.push(user);
@@ -34,7 +36,7 @@ const userNames = (function () {
     return res;
   };
 
-  const free = function (name) {
+  const free = (name) => {
     if (names[name]) {
       delete names[name];
     }
@@ -48,50 +50,18 @@ const userNames = (function () {
   };
 }());
 
-// Keep track of which messages are used so that there are no duplicates
-const historyMessages = (function () {
-  var messages = [];
-
-  const claim = function (message) {
-    if (!message || messages[message]) {
-      return false;
-    } else {
-      messages[message] = true;
-      return true;
-    }
-  };
-
-  // serialize claimed messages as an array
-  const get = function () {
-    return messages;
-  };
-
-  const add = function (user, text) {
-    if (messages.length === 50) {
-      messages.shift();
-    }
-    messages.push({ user, text });
-  };
-
-  const free = function (name) {
-    if (messages[name]) {
-      delete messages[name];
-    }
-  };
-
-  return {
-    claim,
-    free,
-    get: get,
-    add: add,
-  };
-}());
-
 // export function for listening to the socket
 module.exports = function (socket) {
   var name = userNames.getGuestName();
-  var messages = historyMessages.get();
 
+  var messages = [];
+  Message.find({}, function (err, docs) {
+    if (err) throw err;
+    console.log(docs);
+    messages.push(docs);
+  })
+    .exec((err, data) => { messages.push(data); });
+  console.log('Messages: ' + messages);
   // send the new user their name and a list of users
   socket.emit('init', {
     name,
@@ -106,7 +76,16 @@ module.exports = function (socket) {
 
   // broadcast a user's message to other users
   socket.on('send:message', function (data) {
-    historyMessages.add(name, data.text);
+
+    const newMessage = new Message({
+      user: name,
+      text: data.text,
+    });
+    console.log('NEW: ' + newMessage);
+    newMessage.save((err) => {
+      if (err) console.log(err);
+    });
+
     socket.broadcast.emit('send:message', {
       user: name,
       text: data.text,
