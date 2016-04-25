@@ -14,7 +14,7 @@ body {
 	height: 300px;
 	padding: 1em;
 	overflow: hidden;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .message_form,

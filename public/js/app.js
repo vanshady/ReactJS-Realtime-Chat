@@ -234,12 +234,14 @@ var MessageForm = React.createClass({
   },
   handleSubmit: function handleSubmit(e) {
     e.preventDefault();
-    var message = {
-      user: this.props.user,
-      text: this.state.text
-    };
-    this.props.onMessageSubmit(message);
-    this.setState({ text: '' });
+    if (this.state.text) {
+      var message = {
+        user: this.props.user,
+        text: this.state.text
+      };
+      this.props.onMessageSubmit(message);
+      this.setState({ text: '' });
+    }
   },
   changeHandler: function changeHandler(e) {
     this.setState({ text: e.target.value });

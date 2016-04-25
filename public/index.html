@@ -21,21 +21,12 @@
 	<div id="app" class="container"></div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="js/app.js"></script>
-	<!--<script>
-		var scrolled = false;
-
-		function updateScroll() {
-			if (!scrolled) {
-				var element = document.getElementById("messageList");
-				element.scrollTop = element.scrollHeight;
-			}
-		}
-
-		$("#messageList").on('scroll', function() {
-			scrolled = true;
-		});
-		setInterval("updateScroll",1000);
-	</script>-->
+	<script>
+		window.setInterval(function() {
+			var elem = document.getElementById('messageList');
+			elem.scrollTop = elem.scrollHeight;
+		}, 500);
+	</script>
 </body>
 
 </html>
