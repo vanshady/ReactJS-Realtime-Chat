@@ -10,7 +10,7 @@ const socket = io.connect();
 const ChatApp = React.createClass({
 
   getInitialState() {
-    return { users: [], messages: [], text: '' };
+    return { users: [], messages: [], text: ''};
   },
 
   componentDidMount() {
@@ -22,8 +22,8 @@ const ChatApp = React.createClass({
   },
 
   _initialize(data) {
-    const { users, name } = data;
-    this.setState({ users, user: name });
+    const { users, messages, name } = data;
+    this.setState({ users, messages, user: name });
   },
 
   _messageRecieve(message) {
@@ -36,6 +36,7 @@ const ChatApp = React.createClass({
     const { users, messages } = this.state;
     const { name } = data;
     users.push(name);
+    users.sort();
     messages.push({
       user: 'Application bot',
       text: name + ' Joined',
@@ -60,6 +61,7 @@ const ChatApp = React.createClass({
     const { users, messages } = this.state;
     const index = users.indexOf(oldName);
     users.splice(index, 1, newName);
+    users.sort();
     messages.push({
       user: 'Application bot',
       text: 'Change Name : ' + oldName + ' ==> ' + newName,
@@ -91,6 +93,7 @@ const ChatApp = React.createClass({
   render() {
     return (
       <div className="col-md-offset-2 col-md-8">
+        <h2 id="name"> Your name: {this.state.user} </h2>
         <div className="row" id="myapp">
           <div className="col-md-8">
             <MessageList

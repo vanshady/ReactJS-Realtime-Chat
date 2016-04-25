@@ -10,7 +10,7 @@ const UsersList = React.createClass({
     return (
       <div className="users">
         <h3> Online Users </h3>
-        <ul>
+        <ul id="usersList">
           {
             this.props.users.map((user, i) =>
                 <li key={i}>

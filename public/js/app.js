@@ -57,9 +57,10 @@ var ChatApp = React.createClass({
   },
   _initialize: function _initialize(data) {
     var users = data.users;
+    var messages = data.messages;
     var name = data.name;
 
-    this.setState({ users: users, user: name });
+    this.setState({ users: users, messages: messages, user: name });
   },
   _messageRecieve: function _messageRecieve(message) {
     var messages = this.state.messages;
@@ -74,6 +75,7 @@ var ChatApp = React.createClass({
     var name = data.name;
 
     users.push(name);
+    users.sort();
     messages.push({
       user: 'Application bot',
       text: name + ' Joined'
@@ -103,6 +105,7 @@ var ChatApp = React.createClass({
 
     var index = users.indexOf(oldName);
     users.splice(index, 1, newName);
+    users.sort();
     messages.push({
       user: 'Application bot',
       text: 'Change Name : ' + oldName + ' ==> ' + newName
@@ -136,6 +139,13 @@ var ChatApp = React.createClass({
     return React.createElement(
       'div',
       { className: 'col-md-offset-2 col-md-8' },
+      React.createElement(
+        'h2',
+        { id: 'name' },
+        ' Your name: ',
+        this.state.user,
+        ' '
+      ),
       React.createElement(
         'div',
         { className: 'row', id: 'myapp' },
@@ -197,17 +207,25 @@ var ChangeNameForm = React.createClass({
       'div',
       { className: 'change_name_form' },
       React.createElement(
-        'h3',
-        null,
-        ' Change Name '
-      ),
-      React.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
-        React.createElement('input', {
-          onChange: this.onKey,
-          value: this.state.newName
-        })
+        { onSubmit: this.handleSubmit, className: 'form-inline' },
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'label',
+            { 'for': 'name', style: { marginRight: '10px' } },
+            ' Change Name '
+          ),
+          React.createElement('input', {
+            type: 'name',
+            className: 'form-control',
+            id: 'name',
+            placeholder: 'your name',
+            onChange: this.onKey,
+            value: this.state.newName
+          })
+        )
       )
     );
   }
@@ -251,17 +269,25 @@ var MessageForm = React.createClass({
       'div',
       { className: 'message_form' },
       React.createElement(
-        'h3',
-        null,
-        'Write New Message'
-      ),
-      React.createElement(
         'form',
         { onSubmit: this.handleSubmit },
-        React.createElement('input', {
-          onChange: this.changeHandler,
-          value: this.state.text
-        })
+        React.createElement(
+          'div',
+          { className: 'form-group' },
+          React.createElement(
+            'label',
+            { 'for': 'message' },
+            'Write New Message'
+          ),
+          React.createElement('input', {
+            type: 'message',
+            className: 'form-control',
+            placeholder: 'message',
+            id: 'message',
+            onChange: this.changeHandler,
+            value: this.state.text
+          })
+        )
       )
     );
   }
@@ -286,11 +312,6 @@ var MessageList = React.createClass({
     return React.createElement(
       'ul',
       { className: 'messages', id: 'messageList' },
-      React.createElement(
-        'h2',
-        null,
-        ' Conversation: '
-      ),
       this.props.messages.map(function (message, i) {
         return React.createElement(Message, {
           key: i,
@@ -327,7 +348,7 @@ var UsersList = React.createClass({
       ),
       React.createElement(
         "ul",
-        null,
+        { id: "usersList" },
         this.props.users.map(function (user, i) {
           return React.createElement(
             "li",

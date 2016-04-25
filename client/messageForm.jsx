@@ -31,12 +31,18 @@ const MessageForm = React.createClass({
   render() {
     return (
       <div className="message_form">
-        <h3>Write New Message</h3>
         <form onSubmit={this.handleSubmit}>
-          <input
-            onChange={this.changeHandler}
-            value={this.state.text}
-          />
+          <div className="form-group">
+            <label for="message">Write New Message</label>
+            <input
+              type="message"
+              className="form-control"
+              placeholder="message"
+              id="message"
+              onChange={this.changeHandler}
+              value={this.state.text}
+            />
+          </div>
         </form>
       </div>
     );

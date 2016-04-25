@@ -10,7 +10,6 @@ const MessageList = React.createClass({
   render() {
     return (
       <ul className="messages" id="messageList">
-        <h2> Conversation: </h2>
         {
           this.props.messages.map((message, i) =>
               <Message

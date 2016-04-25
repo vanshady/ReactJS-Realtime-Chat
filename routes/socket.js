@@ -48,13 +48,55 @@ const userNames = (function () {
   };
 }());
 
+// Keep track of which messages are used so that there are no duplicates
+const historyMessages = (function () {
+  var messages = [];
+
+  const claim = function (message) {
+    if (!message || messages[message]) {
+      return false;
+    } else {
+      messages[message] = true;
+      return true;
+    }
+  };
+
+  // serialize claimed messages as an array
+  const get = function () {
+    return messages;
+  };
+
+  const add = function (user, text) {
+    if (messages.length === 50) {
+      messages.shift();
+    }
+    messages.push({ user, text });
+    console.log(messages);
+  };
+
+  const free = function (name) {
+    if (messages[name]) {
+      delete messages[name];
+    }
+  };
+
+  return {
+    claim,
+    free,
+    get: get,
+    add: add,
+  };
+}());
+
 // export function for listening to the socket
 module.exports = function (socket) {
   var name = userNames.getGuestName();
+  var messages = historyMessages.get();
 
   // send the new user their name and a list of users
   socket.emit('init', {
     name,
+    messages,
     users: userNames.get(),
   });
 
@@ -65,6 +107,7 @@ module.exports = function (socket) {
 
   // broadcast a user's message to other users
   socket.on('send:message', function (data) {
+    historyMessages.add(name, data.text);
     socket.broadcast.emit('send:message', {
       user: name,
       text: data.text,
