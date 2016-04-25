@@ -14,8 +14,7 @@ const server = http.createServer(app);
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
 
-const uri = process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
+const uri = process.env.MONGODB_URI ||
     'mongodb://localhost/vanshadychat';
 
 const port = process.env.PORT || 3000;
