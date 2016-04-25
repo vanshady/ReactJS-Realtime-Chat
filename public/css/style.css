@@ -8,7 +8,7 @@ body {
 	margin: 1em;
 }
 
-#name {
+h2#name {
 	margin-left: 1em;
 	color: steelblue;
 	text-shadow: 0 1px 1px rgba(0,0,0,.12);
