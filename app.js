@@ -11,10 +11,12 @@ const socket = require('./routes/socket.js');
 const app = express();
 const server = http.createServer(app);
 
+const port = process.env.PORT || 3000;
+
 /* Configuration */
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
-app.set('port', 3000);
+app.set('port', port);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
