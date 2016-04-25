@@ -1,19 +1,20 @@
-body{
-	width: 600px;
-	margin: 0 auto;
-	border: 5px solid tomato;
+body {
+	margin-top: 40px;
 }
-.users{
-	float : right;
-	margin-right: 1.5em;
+
+#myapp {
+	border: 5px solid lightsteelblue;
+	border-radius: 20px;
 }
+
 .messages {
-	width: 400px;
 	margin: 1em;
-	border : 1px solid black;
+	border: 1px solid #ddd;
+	border-radius: 10px; 
 	padding: 1em;
 }
+
 .message_form,
-.change_name_form{
+.change_name_form {
 	padding: 1em;
 }

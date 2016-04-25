@@ -1,0 +1,13 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "react/prefer-es6-class": [2, "never"],
+      "prefer-arrow-callback": 0,
+      "react/prefer-stateless-function": 0,
+      "no-console": 0,
+      "prefer-template": 0
+    }
+}
