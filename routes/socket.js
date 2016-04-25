@@ -54,20 +54,22 @@ const userNames = (function () {
 module.exports = function (socket) {
   var name = userNames.getGuestName();
 
-  var messages = [];
-  Message.find({}, function (err, docs) {
+  Message.find({}, function (err) {
     if (err) throw err;
-    console.log(docs);
-    messages.push(docs);
   })
-    .exec((err, data) => { messages.push(data); });
-  console.log('Messages: ' + messages);
-  // send the new user their name and a list of users
-  socket.emit('init', {
-    name,
-    messages,
-    users: userNames.get(),
-  });
+    .lean()
+    .limit(20)
+    .exec(function (err, messages) {
+      if (err) {
+        return console.log(err);
+      }
+      // send the new user their name and a list of users
+      socket.emit('init', {
+        name,
+        messages,
+        users: userNames.get(),
+      });
+    });
 
   // notify other clients that a new user has joined
   socket.broadcast.emit('user:join', {
@@ -80,7 +82,6 @@ module.exports = function (socket) {
       user: name,
       text: data.text,
     });
-    console.log('NEW: ' + newMessage);
     newMessage.save((err) => {
       if (err) console.log(err);
     });

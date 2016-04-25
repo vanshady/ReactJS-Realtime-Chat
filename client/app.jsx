@@ -10,7 +10,7 @@ const socket = io.connect();
 const ChatApp = React.createClass({
 
   getInitialState() {
-    return { users: [], messages: [], text: ''};
+    return { users: [], messages: [], text: '' };
   },
 
   componentDidMount() {
