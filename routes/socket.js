@@ -76,7 +76,6 @@ module.exports = function (socket) {
 
   // broadcast a user's message to other users
   socket.on('send:message', function (data) {
-
     const newMessage = new Message({
       user: name,
       text: data.text,

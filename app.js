@@ -13,7 +13,11 @@ const server = http.createServer(app);
 
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
-var uri = 'mongodb://<dbuser>:<dbpassword>@ds019491.mlab.com:19491/heroku_2z9c9v4c';
+
+const uri = process.env.MONGOLAB_URI ||
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/HelloMongoose';
 
 const port = process.env.PORT || 3000;
 
@@ -23,7 +27,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('port', port);
 
 if (process.env.NODE_ENV === 'development') {
-  uri = 'mongodb://localhost:27017/myapp';
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 }
 
