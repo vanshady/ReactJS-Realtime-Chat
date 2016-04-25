@@ -14,11 +14,12 @@ const server = http.createServer(app);
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
 
-const uri = process.env.DATABASE_URL ||
+const uri = process.env.MONGODB_URI ||
     'mongodb://localhost/vanshadychat';
 
 const port = process.env.PORT || 3000;
 
+console.log(process.env);
 /* Configuration */
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
