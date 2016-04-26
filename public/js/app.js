@@ -76,10 +76,10 @@ var ChatApp = React.createClass({
 
     users.push(name);
     users.sort();
-    messages.push({
-      user: 'Application bot',
-      text: name + ' Joined'
-    });
+    // messages.push({
+    //   user: 'Application bot',
+    //   text: name + ' Joined',
+    // });
     this.setState({ users: users, messages: messages });
   },
   _userLeft: function _userLeft(data) {
@@ -90,10 +90,10 @@ var ChatApp = React.createClass({
 
     var index = users.indexOf(name);
     users.splice(index, 1);
-    messages.push({
-      user: 'Application bot',
-      text: name + ' Left'
-    });
+    // messages.push({
+    //   user: 'Application bot',
+    //   text: name + ' Left',
+    // });
     this.setState({ users: users, messages: messages });
   },
   _userChangedName: function _userChangedName(data) {
@@ -106,10 +106,10 @@ var ChatApp = React.createClass({
     var index = users.indexOf(oldName);
     users.splice(index, 1, newName);
     users.sort();
-    messages.push({
-      user: 'Application bot',
-      text: 'Change Name : ' + oldName + ' ==> ' + newName
-    });
+    // messages.push({
+    //   user: 'Application bot',
+    //   text: 'Change Name : ' + oldName + ' ==> ' + newName,
+    // });
     this.setState({ users: users, messages: messages });
   },
   handleMessageSubmit: function handleMessageSubmit(message) {
