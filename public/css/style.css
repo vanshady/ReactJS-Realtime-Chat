@@ -23,7 +23,7 @@ h2#name {
 .messages {
 	margin-top: 1em;
 	border: 1px solid #ddd;
-	border-radius: 10px;
+	border-radius: 10px 0 0 10px;
 	height: 300px;
 	overflow: hidden;
 	overflow-y: auto;
