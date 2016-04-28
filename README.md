@@ -8,12 +8,8 @@ First, grab the dependencies:
 
     npm install
 
-Build the applicaiton
-	
-	npm run build
+Then build and run the app like so:
 
-Then run the app like so:
-
-    npm start
+    npm test
 
 And navigate to `localhost:3000` and chat !
