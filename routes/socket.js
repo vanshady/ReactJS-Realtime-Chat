@@ -72,8 +72,9 @@ module.exports = (socket) => {
   Message.find({}, (err) => {
     if (err) throw err;
   })
+    .sort({ _id: 1 })
     .lean()
-    .limit(20)
+    .limit(50)
     .exec(execCallback);
 
   // notify other clients that a new user has joined
