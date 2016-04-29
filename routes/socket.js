@@ -61,6 +61,15 @@ module.exports = (socket) => {
     if (err) {
       return console.log(err);
     }
+    messages.sort((a, b) => {
+      if (a._id > b._id) {
+        return 1;
+      }
+      if (a._id < b._id) {
+        return -1;
+      }
+      return 0;
+    });
     // send the new user their name and a list of users
     socket.emit('init', {
       name,
@@ -72,6 +81,8 @@ module.exports = (socket) => {
   Message.find({}, (err) => {
     if (err) throw err;
   })
+    .sort({ _id: -1 })
+    .limit(100)
     .exec(execCallback);
 
   // notify other clients that a new user has joined
