@@ -32,13 +32,11 @@ const MessageForm = React.createClass({
     return (
       <div className="message_form">
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="message">Write New Message</label>
+          <div>
             <input
               type="message"
-              className="form-control"
-              placeholder="message"
-              id="message"
+              placeholder="Type a message..."
+              id="messageFormInput"
               onChange={this.changeHandler}
               value={this.state.text}
             />

@@ -138,36 +138,54 @@ var ChatApp = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'col-md-offset-2 col-md-8' },
+      { className: 'container-fluid', style: { height: '100%', minHeight: '100%' } },
       React.createElement(
-        'h2',
-        { id: 'name' },
-        ' Your name: ',
-        this.state.user,
-        ' '
+        'div',
+        { className: 'row', id: 'nav' },
+        React.createElement(
+          'div',
+          { className: 'col-md-2 col-xs-4', id: 'githubDiv' },
+          React.createElement(
+            'a',
+            { id: 'github', href: 'https://github.com/vanshady/ReactJS-Realtime-Chat/' },
+            'Code on Github'
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'col-md-10 col-xs-8', id: 'userNameDiv' },
+          React.createElement(
+            'h4',
+            { id: 'userName' },
+            ' ',
+            this.state.user,
+            ' '
+          )
+        )
       ),
       React.createElement(
         'div',
-        { className: 'row', id: 'myapp' },
+        { className: 'row', style: { height: '92%' } },
         React.createElement(
           'div',
-          { className: 'col-md-8' },
-          React.createElement(MessageList, {
-            messages: this.state.messages
+          { className: 'col-md-2 col-xs-4', id: 'UsersBox' },
+          React.createElement(UsersList, {
+            users: this.state.users
           }),
-          React.createElement(MessageForm, {
-            onMessageSubmit: this.handleMessageSubmit,
-            user: this.state.user
-          }),
-          React.createElement(ChangeNameForm, {
+          React.createElement(ChangeNameForm, { className: 'row',
             onChangeName: this.handleChangeName
           })
         ),
         React.createElement(
           'div',
-          { className: 'col-md-4' },
-          React.createElement(UsersList, {
-            users: this.state.users
+          { className: 'col-md-10 col-xs-8', id: 'MessageBox' },
+          React.createElement(MessageList, { id: 'MessageList',
+            className: 'row',
+            messages: this.state.messages
+          }),
+          React.createElement(MessageForm, { className: 'row',
+            onMessageSubmit: this.handleMessageSubmit,
+            user: this.state.user
           })
         )
       )
@@ -208,20 +226,14 @@ var ChangeNameForm = React.createClass({
       { className: 'change_name_form' },
       React.createElement(
         'form',
-        { onSubmit: this.handleSubmit, className: 'form-inline' },
+        { onSubmit: this.handleSubmit },
         React.createElement(
           'div',
-          { className: 'form-group' },
-          React.createElement(
-            'label',
-            { htmlFor: 'name', style: { marginRight: '10px' } },
-            ' Change Name '
-          ),
+          null,
           React.createElement('input', {
             type: 'name',
-            className: 'form-control',
-            id: 'name',
-            placeholder: 'your name',
+            id: 'nameFormInput',
+            placeholder: 'Your name',
             onChange: this.onKey,
             value: this.state.newName
           })
@@ -273,17 +285,11 @@ var MessageForm = React.createClass({
         { onSubmit: this.handleSubmit },
         React.createElement(
           'div',
-          { className: 'form-group' },
-          React.createElement(
-            'label',
-            { htmlFor: 'message' },
-            'Write New Message'
-          ),
+          null,
           React.createElement('input', {
             type: 'message',
-            className: 'form-control',
-            placeholder: 'message',
-            id: 'message',
+            placeholder: 'Type a message...',
+            id: 'messageFormInput',
             onChange: this.changeHandler,
             value: this.state.text
           })
@@ -322,7 +328,7 @@ var MessageList = React.createClass({
   render: function render() {
     return React.createElement(
       'ul',
-      { className: 'messages', id: 'messageList', style: { paddingLeft: '20px' } },
+      { className: 'messages', id: 'messageList' },
       this.props.messages.map(function (message, i) {
         return React.createElement(Message, {
           key: i,
@@ -337,12 +343,12 @@ var MessageList = React.createClass({
 module.exports = MessageList;
 
 },{"./Message.jsx":1,"react":171}],6:[function(require,module,exports){
-"use strict";
+'use strict';
 
 var React = require('react');
 
 var UsersList = React.createClass({
-  displayName: "UsersList",
+  displayName: 'UsersList',
 
   propTypes: {
     users: React.PropTypes.array.isRequired
@@ -350,19 +356,19 @@ var UsersList = React.createClass({
 
   render: function render() {
     return React.createElement(
-      "div",
-      { className: "users" },
+      'div',
+      { className: 'users' },
       React.createElement(
-        "h3",
-        null,
-        " Online Users "
+        'h3',
+        { style: { textAlign: 'center' } },
+        ' Messenger '
       ),
       React.createElement(
-        "ul",
-        { id: "usersList" },
+        'ul',
+        { id: 'usersList' },
         this.props.users.map(function (user, i) {
           return React.createElement(
-            "li",
+            'li',
             { key: i },
             user
           );

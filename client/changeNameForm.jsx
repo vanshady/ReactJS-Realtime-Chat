@@ -25,14 +25,12 @@ const ChangeNameForm = React.createClass({
   render() {
     return (
       <div className="change_name_form">
-        <form onSubmit={this.handleSubmit} className="form-inline">
-          <div className="form-group">
-            <label htmlFor="name" style={{ marginRight: '10px' }}> Change Name </label>
+        <form onSubmit={this.handleSubmit} >
+          <div>
             <input
               type="name"
-              className="form-control"
-              id="name"
-              placeholder="your name"
+              id="nameFormInput"
+              placeholder="Your name"
               onChange={this.onKey}
               value={this.state.newName}
             />

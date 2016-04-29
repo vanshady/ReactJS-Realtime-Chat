@@ -20,7 +20,7 @@ const MessageList = React.createClass({
   },
   render() {
     return (
-      <ul className="messages" id="messageList" style={{ paddingLeft: '20px' }} >
+      <ul className="messages" id="messageList" >
         {
           this.props.messages.map((message, i) =>
             <Message

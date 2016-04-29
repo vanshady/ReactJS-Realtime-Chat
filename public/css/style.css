@@ -1,17 +1,58 @@
 body {
-	margin-top: 40px;
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: rgba(255, 255, 255, .95);
+	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
 }
 
-#myapp {
-	border: 5px solid steelblue;
-	border-radius: 10px;
-	margin: 1em;
+html {
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
-h2#name {
-	margin-left: 1em;
-	color: steelblue;
-	text-shadow: 0 1px 1px rgba(0,0,0,.12);
+#app {
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#githubDiv {
+	height: 100%;
+	top: 20%;
+	min-height: 100%;
+}
+
+#userNameDiv {
+	height: 100%;
+	min-height: 100%;
+	border-left: 1px solid rgba(0, 0, 0, .30);
+}
+
+#nav {
+	height: 8%;
+	border-bottom: 1px solid rgba(0, 0, 0, .10);
+	text-align: center;
+	margin-bottom: 0px;
+	display: block;
+}
+
+#github {
+	text-align: center;
+	font-size: 20px;
+}
+
+#userName {
+	text-align: center;
+	transform: translate(0, 50%);
 }
 
 #usersList {
@@ -21,15 +62,54 @@ h2#name {
 }
 
 .messages {
-	margin-top: 1em;
-	border: 1px solid #ddd;
-	border-radius: 10px 0 0 10px;
-	height: 300px;
+	padding-top: 1em;
+	height: 85%;
+	position: relative;
 	overflow: hidden;
 	overflow-y: auto;
 }
 
-/*.message_form,
+#MessageBox {
+	border-left: 1px solid rgba(0, 0, 0, .30) !important;
+	padding: 0;
+	height: 100%;
+	position: relative;
+}
+
+#UsersBox {
+	padding: 0;
+	height: 100%;
+	position: relative;
+}
+
+.message_form {
+	margin-bottom: 10px;
+}
+
 .change_name_form {
-	padding: 1em;
-}*/
+	margin-left: 60px;
+	top: 90%;
+	position: absolute;
+}
+
+#messageList {
+	border-bottom: 1px solid rgba(0, 0, 0, .10) !important;
+}
+
+#messageFormInput {
+	border-radius: 0;
+	border-width: 0px;
+	height: 100%;
+	width: 100%;
+	min-width: 100%;
+	padding-left: 20px;
+}
+
+#nameFormInput {
+	border-radius: 0;
+	border-width: 0px;
+}
+
+*:focus {
+	outline: none;
+}

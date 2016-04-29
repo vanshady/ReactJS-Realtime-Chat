@@ -92,24 +92,32 @@ const ChatApp = React.createClass({
 
   render() {
     return (
-      <div className="col-md-offset-2 col-md-8">
-        <h2 id="name"> Your name: {this.state.user} </h2>
-        <div className="row" id="myapp">
-          <div className="col-md-8">
-            <MessageList
-              messages={this.state.messages}
+      <div className="container-fluid" style={{ height: '100%', minHeight: '100%' }} >
+        <div className="row" id="nav">
+          <div className="col-md-2 col-xs-4" id="githubDiv">
+            <a id="github" href="https://github.com/vanshady/ReactJS-Realtime-Chat/">Code on Github</a>
+          </div>
+          <div className="col-md-10 col-xs-8" id="userNameDiv">
+            <h4 id="userName"> {this.state.user} </h4>
+          </div>
+        </div>
+        <div className="row" style={{ height: '92%' }}>
+          <div className="col-md-2 col-xs-4" id="UsersBox">
+            <UsersList
+              users={this.state.users}
             />
-            <MessageForm
-              onMessageSubmit={this.handleMessageSubmit}
-              user={this.state.user}
-            />
-            <ChangeNameForm
+            <ChangeNameForm className="row"
               onChangeName={this.handleChangeName}
             />
           </div>
-          <div className="col-md-4">
-            <UsersList
-              users={this.state.users}
+          <div className="col-md-10 col-xs-8" id="MessageBox">
+            <MessageList id="MessageList"
+              className="row"
+              messages={this.state.messages}
+            />
+            <MessageForm className="row"
+              onMessageSubmit={this.handleMessageSubmit}
+              user={this.state.user}
             />
           </div>
         </div>
