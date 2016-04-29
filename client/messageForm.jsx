@@ -30,17 +30,15 @@ const MessageForm = React.createClass({
 
   render() {
     return (
-      <div className="message_form">
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type="message"
-              placeholder="Type a message..."
-              id="messageFormInput"
-              onChange={this.changeHandler}
-              value={this.state.text}
-            />
-          </div>
+      <div className="message_form_div">
+        <form className="message_form" onSubmit={this.handleSubmit} autoComplete="off">
+          <input
+            type="message"
+            placeholder="Type a message..."
+            id="messageFormInput"
+            onChange={this.changeHandler}
+            value={this.state.text}
+          />
         </form>
       </div>
     );

@@ -24,17 +24,15 @@ const ChangeNameForm = React.createClass({
 
   render() {
     return (
-      <div className="change_name_form">
-        <form onSubmit={this.handleSubmit} >
-          <div>
-            <input
-              type="name"
-              id="nameFormInput"
-              placeholder="Your name"
-              onChange={this.onKey}
-              value={this.state.newName}
-            />
-          </div>
+      <div className="change_name_form_div">
+        <form className="change_name_form" onSubmit={this.handleSubmit} autoComplete="off" >
+          <input
+            type="name"
+            id="nameFormInput"
+            placeholder="Your name"
+            onChange={this.onKey}
+            value={this.state.newName}
+          />
         </form>
       </div>
     );

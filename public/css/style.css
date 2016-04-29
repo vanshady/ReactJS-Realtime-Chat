@@ -82,8 +82,14 @@ html {
 	position: relative;
 }
 
+.message_form_div {
+	height: 13%;
+	position: relative;
+}
+
 .message_form {
-	margin-bottom: 10px;
+	height: 100%;
+	position: relative;
 }
 
 #messageList {
@@ -99,18 +105,24 @@ html {
 	padding-left: 20px;
 }
 
-.change_name_form {
+.change_name_form_div {
 	top: 86.5%;
+	width: 100%;
+	height: 60px;
 	position: absolute;
 }
 
+.change_name_form {
+	 height:100%;
+	 position: relative;
+}
 #nameFormInput {
 	border-radius: 0;
 	border-width: 0px;
 	width: 100%;
+	height: 100%;
 	position: relative;
 	text-align: center;
-	padding-left: 20px;
 }
 
 *:focus {
@@ -118,5 +130,5 @@ html {
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }

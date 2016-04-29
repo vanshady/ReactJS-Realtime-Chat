@@ -223,21 +223,17 @@ var ChangeNameForm = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'change_name_form' },
+      { className: 'change_name_form_div' },
       React.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
-        React.createElement(
-          'div',
-          null,
-          React.createElement('input', {
-            type: 'name',
-            id: 'nameFormInput',
-            placeholder: 'Your name',
-            onChange: this.onKey,
-            value: this.state.newName
-          })
-        )
+        { className: 'change_name_form', onSubmit: this.handleSubmit, autoComplete: 'off' },
+        React.createElement('input', {
+          type: 'name',
+          id: 'nameFormInput',
+          placeholder: 'Your name',
+          onChange: this.onKey,
+          value: this.state.newName
+        })
       )
     );
   }
@@ -279,21 +275,17 @@ var MessageForm = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'message_form' },
+      { className: 'message_form_div' },
       React.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
-        React.createElement(
-          'div',
-          null,
-          React.createElement('input', {
-            type: 'message',
-            placeholder: 'Type a message...',
-            id: 'messageFormInput',
-            onChange: this.changeHandler,
-            value: this.state.text
-          })
-        )
+        { className: 'message_form', onSubmit: this.handleSubmit, autoComplete: 'off' },
+        React.createElement('input', {
+          type: 'message',
+          placeholder: 'Type a message...',
+          id: 'messageFormInput',
+          onChange: this.changeHandler,
+          value: this.state.text
+        })
       )
     );
   }
