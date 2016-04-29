@@ -27,7 +27,7 @@ html {
 
 #githubDiv {
 	height: 100%;
-	top: 20%;
+	transform: translate(0, 25%);
 	min-height: 100%;
 }
 

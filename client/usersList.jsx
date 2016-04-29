@@ -9,7 +9,7 @@ const UsersList = React.createClass({
   render() {
     return (
       <div className="users">
-        <h3 style={{ textAlign: 'center' }}> Messenger </h3>
+        <h3 style={{ textAlign: 'center' }}> Online Users </h3>
         <ul id="usersList">
           {
             this.props.users.map((user, i) =>

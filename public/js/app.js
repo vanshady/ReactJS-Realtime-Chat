@@ -361,7 +361,7 @@ var UsersList = React.createClass({
       React.createElement(
         'h3',
         { style: { textAlign: 'center' } },
-        ' Messenger '
+        ' Online Users '
       ),
       React.createElement(
         'ul',
