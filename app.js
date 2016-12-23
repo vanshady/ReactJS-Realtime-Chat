@@ -1,12 +1,6 @@
-
-/**
- * Module dependencies.
- */
-
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const socketCookieParser = require('socket.io-cookie');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -43,28 +37,7 @@ mongoose.connect(uri, options);
 /* Socket.io Communication */
 const io = require('socket.io').listen(server);
 
-io.use(socketCookieParser);
-// io.use((soc, next) => {
-//   if (soc.request.headers.cookie) {
-//     console.log(soc.request.headers.cookie);
-//   }
-//   next();
-// });
-
 io.sockets.on('connection', socket);
-
-app.post('/name', (req, res) => {
-  // console.log('post name');
-  const minute = 60 * 1000;
-  // console.log(req.body);
-  if (req.body.name) {
-    // console.log(req.body.name);
-    res.cookie('name', req.body.name, { maxAge: minute });
-    res.end('Success');
-  } else {
-    res.end('Failed');
-  }
-});
 
 /* Start server */
 server.listen(app.get('port'), () => {

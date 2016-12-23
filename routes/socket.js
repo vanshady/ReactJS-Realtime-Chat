@@ -1,5 +1,3 @@
-
-
 const Message = require('./message');
 
 // Keep track of which names are used so that there are no duplicates
