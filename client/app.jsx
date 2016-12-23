@@ -1,38 +1,45 @@
-
 const React = require('react');
 const ReactDOM = require('react-dom');
+const request = require('superagent');
+const Cookies = require('jakobmattsson-client-cookies');
 const UsersList = require('./usersList.jsx');
 const MessageList = require('./messageList.jsx');
 const MessageForm = require('./messageForm.jsx');
 const ChangeNameForm = require('./changeNameForm.jsx');
+
 const socket = io.connect();
 
 const ChatApp = React.createClass({
-
   getInitialState() {
     return { users: [], messages: [], text: '', scrollTop: 0 };
   },
 
   componentDidMount() {
-    socket.on('init', this._initialize);
-    socket.on('send:message', this._messageRecieve);
-    socket.on('user:join', this._userJoined);
-    socket.on('user:left', this._userLeft);
-    socket.on('change:name', this._userChangedName);
+    socket.on('init', this.initialize);
+    socket.on('send:message', this.messageRecieve);
+    socket.on('user:join', this.userJoined);
+    socket.on('user:left', this.userLeft);
+    socket.on('change:name', this.userChangedName);
+    if (Cookies.get('name')) this.handleChangeName(Cookies.get('name'));
   },
 
-  _initialize(data) {
+  initialize(data) {
     const { users, messages, name } = data;
-    this.setState({ users, messages, user: name });
+    if (this.state.user) {
+      console.log('we have name!!!');
+      this.setState({ users, messages });
+    } else {
+      this.setState({ users, messages, user: name });
+    }
   },
 
-  _messageRecieve(message) {
+  messageRecieve(message) {
     const { messages } = this.state;
     messages.push(message);
     this.setState({ messages, scrollTop: document.getElementById('messageList').scrollHeight });
   },
 
-  _userJoined(data) {
+  userJoined(data) {
     const { users, messages } = this.state;
     const { name } = data;
     users.push(name);
@@ -44,7 +51,7 @@ const ChatApp = React.createClass({
     this.setState({ users, messages });
   },
 
-  _userLeft(data) {
+  userLeft(data) {
     const { users, messages } = this.state;
     const { name } = data;
     const index = users.indexOf(name);
@@ -56,7 +63,7 @@ const ChatApp = React.createClass({
     this.setState({ users, messages });
   },
 
-  _userChangedName(data) {
+  userChangedName(data) {
     const { oldName, newName } = data;
     const { users, messages } = this.state;
     const index = users.indexOf(oldName);
@@ -78,6 +85,14 @@ const ChatApp = React.createClass({
 
   handleChangeName(newName) {
     const oldName = this.state.user;
+    console.log(`new name: ${newName}`);
+    // request.post('/name')
+    //   .send({ name: newName })
+    //   .end(function (err, res) {
+    //     if (err) console.log(err);
+    //     console.log(res);
+    //   });
+    Cookies.set('name', newName);
     socket.emit('change:name', { name: newName }, (result) => {
       if (!result) {
         return 'There was an error changing your name';
@@ -105,20 +120,23 @@ const ChatApp = React.createClass({
           <div className="col-md-2 col-xs-4" id="UsersBox">
             <UsersList
               users={this.state.users}
-            />
-            <ChangeNameForm className="row"
+              />
+            <ChangeNameForm
+              className="row"
               onChangeName={this.handleChangeName}
-            />
+              />
           </div>
           <div className="col-md-10 col-xs-8" id="MessageBox">
-            <MessageList id="MessageList"
+            <MessageList
+              id="MessageList"
               className="row"
               messages={this.state.messages}
-            />
-            <MessageForm className="row"
+              />
+            <MessageForm
+              className="row"
               onMessageSubmit={this.handleMessageSubmit}
               user={this.state.user}
-            />
+              />
           </div>
         </div>
       </div>

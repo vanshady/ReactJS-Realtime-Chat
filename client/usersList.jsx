@@ -13,10 +13,9 @@ const UsersList = React.createClass({
         <ul id="usersList">
           {
             this.props.users.map((user, i) =>
-                <li key={i}>
+                (<li key={i}>
                   {user}
-                </li>
-              )
+                </li>))
           }
         </ul>
       </div>

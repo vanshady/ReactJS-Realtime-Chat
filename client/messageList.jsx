@@ -23,12 +23,11 @@ const MessageList = React.createClass({
       <ul className="messages" id="messageList" >
         {
           this.props.messages.map((message, i) =>
-            <Message
+            (<Message
               key={i}
               user={message.user}
               text={message.text}
-            />
-          )
+            />))
         }
       </ul>
     );

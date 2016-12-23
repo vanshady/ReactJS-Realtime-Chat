@@ -1,4 +1,4 @@
-'use strict';
+
 
 const Message = require('./message');
 
@@ -49,7 +49,7 @@ const userNames = (() => {
   return {
     claim,
     free,
-    get: get,
+    get,
     getGuestName,
   };
 })();
@@ -105,6 +105,7 @@ module.exports = (socket) => {
       text: data.text,
     });
   });
+
 
   // validate a user's name change, and broadcast it on success
   socket.on('change:name', (data, fn) => {
