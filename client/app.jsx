@@ -6,7 +6,7 @@ const MessageList = require('./messageList.jsx');
 const MessageForm = require('./messageForm.jsx');
 const ChangeNameForm = require('./changeNameForm.jsx');
 
-const socket = io.connect();
+const socket = require('socket.io-client').connect();
 
 const ChatApp = React.createClass({
   getInitialState() {
