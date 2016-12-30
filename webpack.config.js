@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const BUILD_DIR = path.resolve(__dirname, 'client/src');
-const APP_DIR = path.resolve(__dirname, 'client/public/js');
+const APP_DIR = path.resolve(__dirname, 'client/src');
+const BUILD_DIR = path.resolve(__dirname, 'client/public/js');
 
 const config = {
   entry: APP_DIR + '/app.jsx',
@@ -15,6 +15,11 @@ const config = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
+        loader: 'babel',
+      },
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
         loader: 'babel',
       },
     ],
