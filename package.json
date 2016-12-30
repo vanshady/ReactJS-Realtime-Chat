@@ -2,10 +2,10 @@
   "name": "reactjs-socket-io-chat-app",
   "version": "0.7.0",
   "scripts": {
-    "build": "watchify ./client/app.jsx -v -t [ babelify --presets [ es2015 react ] ] -o public/js/app.js",
-    "start": "nodemon app.js",
-    "test": "npm run build & npm run start",
-    "webpack": "webpack -d --watch"
+    "dist": "webpack --config webpack.prod.config.js -p",
+    "dev": "webpack --config webpack.dev.config.js -d --watch",
+    "start": "node app.js",
+    "devstart": "npm run dev | nodemon app.js"
   },
   "dependencies": {
     "babel-core": "^6.21.0",
@@ -22,6 +22,7 @@
     "nodemon": "^1.11.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-hot-loader": "^1.3.1",
     "react-redux": "^5.0.1",
     "redis": "^2.6.3",
     "redux": "^3.6.0",
@@ -29,9 +30,8 @@
     "socket.io-client": "^1.7.2",
     "socket.io-cookie": "0.0.1",
     "superagent": "^3.3.1",
-    "watchify": "^3.8.0"
-  },
-  "devDependencies": {
-    "webpack": "^1.14.0"
+    "watchify": "^3.8.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   }
 }

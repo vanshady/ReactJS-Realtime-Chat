@@ -10,17 +10,14 @@ const config = {
     path: BUILD_DIR,
     filename: 'bundle.js',
   },
+  debug: true,
+  devtool: 'source-map',
   module: {
     loaders: [
       {
-        test: /\.jsx?/,
-        include: APP_DIR,
-        loader: 'babel',
-      },
-      {
-        test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'babel',
+        test: /\.(js|jsx)$/,
+        loader: 'react-hot!babel?presets[]=react&presets[]=es2015',
+        exclude: /(node_modules)/,
       },
     ],
   },
