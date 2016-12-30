@@ -3,16 +3,10 @@ const http = require('http');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const socket = require('./routes/socket.js');
 
 const app = express();
 const server = http.createServer(app);
-
-mongoose.set('debug', true);
-
-const uri = process.env.MONGODB_URI ||
-    'mongodb://localhost/vanshadychat';
 
 const port = process.env.PORT || 3000;
 
@@ -27,12 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 }
-
-const options = {
-  server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
-};
-mongoose.connect(uri, options);
 
 /* Socket.io Communication */
 const io = require('socket.io').listen(server);

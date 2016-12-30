@@ -1,134 +1,98 @@
-const Message = require('./message');
+const redis = require('redis');
+const bluebird = require('bluebird');
 
-// Keep track of which names are used so that there are no duplicates
-const userNames = (() => {
-  const names = {};
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 
-  const claim = (name) => {
-    if (!name || names[name]) {
-      return false;
-    }
+const client = redis.createClient(process.env.REDIS_URL);
+client.on('error', (err) => {
+  console.log('Error ' + err);
+});
 
-    names[name] = true;
-    return true;
-  };
+const removeName = (name) => {
+  client.lrem('chatroom:public:users', 1, name);
+};
 
-  // find the lowest unused "guest" name and claim it
-  const getGuestName = () => {
-    let name;
-    let nextUserId = 1;
+const changeName = (oldName, newName) => {
+  client.multi()
+  .lrem(['chatroom:public:users', 1, oldName])
+  .rpush(['chatroom:public:users', newName])
+  .execAsync();
+};
 
-    do {
-      name = 'Guest ' + nextUserId;
-      nextUserId += 1;
-    } while (!claim(name));
-
-    return name;
-  };
-
-  // serialize claimed names as an array
-  const get = () => {
-    const res = [];
-    for (const user in names) {
-      if (user) {
-        res.push(user);
-      }
-    }
-
-    return res;
-  };
-
-  const free = (name) => {
-    if (names[name]) {
-      delete names[name];
-    }
-  };
-
-  return {
-    claim,
-    free,
-    get,
-    getGuestName,
-  };
-})();
+const decrGuest = () => {
+  client.multi().decr('guest_num').execAsync();
+};
 
 // export function for listening to the socket
 module.exports = (socket) => {
-  let name = userNames.getGuestName();
-  const execCallback = (err, messages) => {
-    if (err) {
-      return console.log(err);
-    }
-    messages.sort((a, b) => {
-      if (a._id > b._id) {
-        return 1;
-      }
-      if (a._id < b._id) {
-        return -1;
-      }
-      return 0;
-    });
+  client.multi().incr('guest_num').execAsync()
+  .then(num => client.multi()
+    .rpush('chatroom:public:users', 'Guest ' + num)
+    .lrange('chatroom:public:users', 0, -1)
+    .lrange('chatroom:public:messages', 0, -1)
+    .execAsync()
+    .then(replies => ({
+      paramName: 'Guest ' + num,
+      paramUsers: replies[1],
+      paramMessages: replies[2],
+    })))
+  .then((res) => {
+    const { paramName, paramUsers, paramMessages } = res;
+    let name = paramName;
+    const users = paramUsers;
+    let messages = paramMessages;
+    messages = messages.map(item => JSON.parse(item));
+
     // send the new user their name and a list of users
     socket.emit('init', {
       name,
       messages,
-      users: userNames.get(),
-    });
-  };
-
-  Message.find({}, (err) => {
-    if (err) throw err;
-  })
-    .sort({ _id: -1 })
-    .limit(100)
-    .exec(execCallback);
-
-  // notify other clients that a new user has joined
-  socket.broadcast.emit('user:join', {
-    name,
-  });
-
-  // broadcast a user's message to other users
-  socket.on('send:message', (data) => {
-    const newMessage = new Message({
-      user: name,
-      text: data.text,
-    });
-    newMessage.save((err) => {
-      if (err) console.log(err);
+      users,
     });
 
-    socket.broadcast.emit('send:message', {
-      user: name,
-      text: data.text,
+    // notify other clients that a new user has joined
+    socket.broadcast.emit('user:join', {
+      name,
     });
-  });
 
+    // broadcast a user's message to other users
+    socket.on('send:message', (data) => {
+      const newMessage = {
+        user: name,
+        text: data.text,
+      };
 
-  // validate a user's name change, and broadcast it on success
-  socket.on('change:name', (data, fn) => {
-    if (userNames.claim(data.name)) {
+      client.rpush('chatroom:public:messages', JSON.stringify(newMessage));
+
+      socket.broadcast.emit('send:message', newMessage);
+    });
+
+    // validate a user's name change, and broadcast it on success
+    socket.on('change:name', (data, fn) => {
       const oldName = name;
-      userNames.free(oldName);
+      const newName = data.name;
+      if (oldName.substr(0, 5) === 'Guest') {
+        decrGuest();
+      }
 
-      name = data.name;
+      changeName(oldName, newName);
+      name = newName;
 
       socket.broadcast.emit('change:name', {
         oldName,
-        newName: name,
+        newName,
       });
 
       fn(true);
-    } else {
-      fn(false);
-    }
-  });
-
-  // clean up when a user leaves, and broadcast it to other users
-  socket.on('disconnect', () => {
-    socket.broadcast.emit('user:left', {
-      name,
     });
-    userNames.free(name);
+
+    // clean up when a user leaves, and broadcast it to other users
+    socket.on('disconnect', () => {
+      socket.broadcast.emit('user:left', {
+        name,
+      });
+      removeName(name);
+    });
   });
 };
