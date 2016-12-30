@@ -1,6 +1,6 @@
 
 const React = require('react');
-const Message = require('./Message.jsx');
+const Message = require('./message.jsx');
 
 let shouldScrollBottom;
 

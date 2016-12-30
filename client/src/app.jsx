@@ -1,10 +1,10 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Cookies = require('jakobmattsson-client-cookies');
-const UsersList = require('./usersList.jsx');
-const MessageList = require('./messageList.jsx');
-const MessageForm = require('./messageForm.jsx');
-const ChangeNameForm = require('./changeNameForm.jsx');
+const UsersList = require('./components/usersList.jsx');
+const MessageList = require('./components/messageList.jsx');
+const MessageForm = require('./components/messageForm.jsx');
+const ChangeNameForm = require('./components/changeNameForm.jsx');
 
 const socket = require('socket.io-client').connect();
 

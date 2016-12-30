@@ -19,6 +19,7 @@
     "nodemon": "^1.11.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
     "socket.io-cookie": "0.0.1",
@@ -26,5 +27,6 @@
     "watchify": "^3.8.0"
   },
   "devDependencies": {
+    "webpack": "^1.14.0"
   }
 }
