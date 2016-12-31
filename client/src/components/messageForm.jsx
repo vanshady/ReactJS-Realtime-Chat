@@ -1,27 +1,14 @@
-
-const React = require('react');
+import React from 'react';
+import { connect } from 'react-redux';
+import { sendMessage } from 'actions/message';
 
 const MessageForm = React.createClass({
   propTypes: {
-    user: React.PropTypes.string,
-    text: React.PropTypes.string,
-    onMessageSubmit: React.PropTypes.func.isRequired,
+    sendMessage: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return { text: '' };
-  },
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.state.text) {
-      const message = {
-        user: this.props.user,
-        text: this.state.text,
-      };
-      this.props.onMessageSubmit(message);
-      this.setState({ text: '' });
-    }
   },
 
   changeHandler(e) {
@@ -31,7 +18,7 @@ const MessageForm = React.createClass({
   render() {
     return (
       <div className="message_form_div">
-        <form className="message_form" onSubmit={this.handleSubmit} autoComplete="off">
+        <form className="message_form" onSubmit={this.sendMessage} autoComplete="off">
           <input
             type="message"
             placeholder="Type a message..."
@@ -45,4 +32,14 @@ const MessageForm = React.createClass({
   },
 });
 
-module.exports = MessageForm;
+const mapStateToProps = state => ({
+  name: state.name,
+});
+
+const mapDispatchToProps = dispatch => ({
+  sendMessage: (name) => {
+    dispatch(sendMessage(name));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageForm);

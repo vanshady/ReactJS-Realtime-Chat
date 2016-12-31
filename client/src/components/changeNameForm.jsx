@@ -1,10 +1,10 @@
-
-const React = require('react');
+import React from 'react';
+import { connect } from 'react-redux';
+import { changeName } from 'actions/message';
 
 const ChangeNameForm = React.createClass({
-
   propTypes: {
-    onChangeName: React.PropTypes.func.isRequired,
+    changeName: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -18,7 +18,7 @@ const ChangeNameForm = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     const newName = this.state.newName;
-    this.props.onChangeName(newName);
+    this.props.changeName(newName);
     this.setState({ newName: '' });
   },
 
@@ -39,4 +39,14 @@ const ChangeNameForm = React.createClass({
   },
 });
 
-module.exports = ChangeNameForm;
+const mapStateToProps = state => ({
+  name: state.name,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeName: (name) => {
+    dispatch(changeName(name));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeNameForm);

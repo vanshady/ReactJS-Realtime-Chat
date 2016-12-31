@@ -1,9 +1,9 @@
-
-const React = require('react');
+import React from 'react';
+import { connect } from 'react-redux';
 
 const UsersList = React.createClass({
   propTypes: {
-    users: React.PropTypes.array.isRequired,
+    users: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   },
 
   render() {
@@ -23,4 +23,8 @@ const UsersList = React.createClass({
   },
 });
 
-module.exports = UsersList;
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
+
+export default connect(mapStateToProps)(UsersList);

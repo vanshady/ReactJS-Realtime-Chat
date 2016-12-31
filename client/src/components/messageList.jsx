@@ -1,12 +1,13 @@
+import React from 'react';
+import { connect } from 'react-redux';
 
-const React = require('react');
-const Message = require('./message.jsx');
+const Message = require('components/Message.jsx');
 
 let shouldScrollBottom;
 
 const MessageList = React.createClass({
   propTypes: {
-    messages: React.PropTypes.array,
+    messages: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
   },
   componentWillUpdate: () => {
     const node = document.getElementById('messageList');
@@ -34,4 +35,9 @@ const MessageList = React.createClass({
   },
 });
 
-module.exports = MessageList;
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
+
+export default connect(mapStateToProps)(MessageList);
+

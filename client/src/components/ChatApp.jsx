@@ -1,19 +1,21 @@
 import Cookies from 'jakobmattsson-client-cookies';
+import React from 'react';
+import { connect } from 'react-redux';
+import { changeName } from 'actions/message';
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-const UsersList = require('./usersList.jsx');
-const MessageList = require('./messageList.jsx');
-const MessageForm = require('./messageForm.jsx');
-const ChangeNameForm = require('./changeNameForm.jsx');
+const UsersList = require('components/UsersList.jsx');
+const MessageList = require('components/MessageList.jsx');
+const MessageForm = require('components/MessageForm.jsx');
+const ChangeNameForm = require('components/ChangeNameForm.jsx');
 
 const ChatApp = React.createClass({
-  getInitialState() {
-    return { users: [], messages: [], text: '', scrollTop: 0 };
+  propTypes: {
+    name: React.PropTypes.string.isRequired,
+    changeName: React.PropTypes.func.isRequired,
   },
 
   componentDidMount() {
-    if (Cookies.get('name')) this.handleChangeName(Cookies.get('name'));
+    if (Cookies.get('name')) this.props.changeName(Cookies.get('name'));
   },
 
   render() {
@@ -24,14 +26,12 @@ const ChatApp = React.createClass({
             <a id="github" href="https://github.com/vanshady/ReactJS-Realtime-Chat/">Code on Github</a>
           </div>
           <div className="col-md-10 col-xs-8" id="userNameDiv">
-            <h4 id="userName"> {this.state.user} </h4>
+            <h4 id="userName"> {this.props.name} </h4>
           </div>
         </div>
         <div className="row" style={{ height: '92%' }}>
           <div className="col-md-2 col-xs-4" id="UsersBox">
-            <UsersList
-              users={this.state.users}
-            />
+            <UsersList />
             <ChangeNameForm
               className="row"
             />
@@ -40,12 +40,8 @@ const ChatApp = React.createClass({
             <MessageList
               id="MessageList"
               className="row"
-              messages={this.state.messages}
             />
-            <MessageForm
-              className="row"
-              user={this.state.user}
-            />
+            <MessageForm className="row" />
           </div>
         </div>
       </div>
@@ -53,4 +49,14 @@ const ChatApp = React.createClass({
   },
 });
 
-ReactDOM.render(<ChatApp />, document.getElementById('app'));
+const mapStateToProps = state => ({
+  name: state.name,
+});
+
+const mapDispatchToProps = dispatch => ({
+  changeName: (name) => {
+    dispatch(changeName(name));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);
