@@ -10,7 +10,16 @@ client.on('error', (err) => {
 });
 
 const removeName = (name) => {
-  client.lrem('chatroom:public:users', 1, name);
+  if (name.substr(0, 5) === 'Guest') {
+    client.multi()
+      .lrem('chatroom:public:users', 1, name)
+      .decr('guest_num')
+      .execAsync();
+  } else {
+    client.multi()
+      .lrem('chatroom:public:users', 1, name)
+      .execAsync();
+  }
 };
 
 const changeName = (oldName, newName) => {
@@ -28,12 +37,12 @@ const decrGuest = () => {
 module.exports = (socket) => {
   client.multi().incr('guest_num').execAsync()
   .then(num => client.multi()
-    .rpush('chatroom:public:users', 'Guest ' + num)
+    .rpush('chatroom:public:users', `Guest ${parseFloat(num, 10) + 1}`)
     .lrange('chatroom:public:users', 0, -1)
     .lrange('chatroom:public:messages', 0, -1)
     .execAsync()
     .then(replies => ({
-      paramName: 'Guest ' + num,
+      paramName: `Guest ${parseFloat(num, 10) + 1}`,
       paramUsers: replies[1],
       paramMessages: replies[2],
     })))
@@ -62,16 +71,16 @@ module.exports = (socket) => {
         user: name,
         text: data.text,
       };
-
       client.rpush('chatroom:public:messages', JSON.stringify(newMessage));
 
       socket.broadcast.emit('send:message', newMessage);
     });
 
     // validate a user's name change, and broadcast it on success
-    socket.on('change:name', (data, fn) => {
+    socket.on('change:name', (data) => {
+      console.log(data);
       const oldName = name;
-      const newName = data.name;
+      const newName = data.newName;
       if (oldName.substr(0, 5) === 'Guest') {
         decrGuest();
       }
@@ -84,7 +93,7 @@ module.exports = (socket) => {
         newName,
       });
 
-      fn(true);
+      // fn(true);
     });
 
     // clean up when a user leaves, and broadcast it to other users

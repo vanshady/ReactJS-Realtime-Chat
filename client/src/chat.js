@@ -10,10 +10,10 @@ export function chatMiddleware(store) {
       if (action.type === actions.SEND_MESSAGE) {
         socket.emit('send:message', action.message);
       } else if (action.type === actions.CHANGE_NAME) {
-        const newName = actions.newName;
+        const newName = action.newName;
 
         Cookies.set('name', newName);
-        socket.emit('change:name', { name: newName });
+        socket.emit('change:name', { newName });
       }
     }
 
@@ -26,17 +26,19 @@ export default function (store) {
 
   socket.on('init', (data) => {
     const { users, messages, name } = data;
-    store.dispatch(actions.setName(name));
-    store.dispatch(actions.setUsers(users));
-    store.dispatch(actions.setMessages(messages));
+    // let newName = '';
+    // if (store.getState().name) {
+    //   newName = store.getState().name;
+    // }
+    store.dispatch(actions.init(users, messages, name));
   });
   socket.on('send:message', (message) => {
     store.dispatch(actions.addMessage(message));
   });
-  socket.on('user:join', (name) => {
+  socket.on('user:join', ({ name }) => {
     store.dispatch(actions.addUser(name));
   });
-  socket.on('user:left', (name) => {
+  socket.on('user:left', ({ name }) => {
     store.dispatch(actions.deleteUser(name));
   });
   socket.on('change:name', ({ oldName, newName }) => {

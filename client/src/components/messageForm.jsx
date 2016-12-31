@@ -4,11 +4,20 @@ import { sendMessage } from 'actions/message';
 
 const MessageForm = React.createClass({
   propTypes: {
+    name: React.PropTypes.string.isRequired,
     sendMessage: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return { text: '' };
+  },
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text && this.state.text.length > 0) {
+      this.props.sendMessage({ user: this.props.name, text: this.state.text });
+      this.setState({ text: '' });
+    }
   },
 
   changeHandler(e) {
@@ -18,7 +27,7 @@ const MessageForm = React.createClass({
   render() {
     return (
       <div className="message_form_div">
-        <form className="message_form" onSubmit={this.sendMessage} autoComplete="off">
+        <form className="message_form" onSubmit={this.handleSubmit} autoComplete="off">
           <input
             type="message"
             placeholder="Type a message..."
@@ -37,9 +46,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  sendMessage: (name) => {
-    dispatch(sendMessage(name));
+  sendMessage: (message) => {
+    dispatch(sendMessage(message));
   },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageForm);
+

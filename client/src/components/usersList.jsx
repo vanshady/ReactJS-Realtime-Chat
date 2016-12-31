@@ -24,7 +24,7 @@ const UsersList = React.createClass({
 });
 
 const mapStateToProps = state => ({
-  messages: state.messages,
+  users: state.users,
 });
 
 export default connect(mapStateToProps)(UsersList);

@@ -61,15 +61,15 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _ChatApp = __webpack_require__(/*! components/ChatApp.jsx */ 269);
+	var _ChatApp = __webpack_require__(/*! components/ChatApp.jsx */ 216);
 	
 	var _ChatApp2 = _interopRequireDefault(_ChatApp);
 	
-	var _chat = __webpack_require__(/*! ./chat */ 216);
+	var _chat = __webpack_require__(/*! ./chat */ 220);
 	
 	var _chat2 = _interopRequireDefault(_chat);
 	
-	var _store = __webpack_require__(/*! ./store */ 267);
+	var _store = __webpack_require__(/*! ./store */ 218);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -24369,6 +24369,307 @@
 
 /***/ },
 /* 216 */
+/*!*******************************************!*\
+  !*** ./client/src/components/ChatApp.jsx ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _message = __webpack_require__(/*! actions/message */ 217);
+	
+	var _UsersList = __webpack_require__(/*! components/UsersList.jsx */ 270);
+	
+	var _UsersList2 = _interopRequireDefault(_UsersList);
+	
+	var _MessageList = __webpack_require__(/*! components/MessageList.jsx */ 271);
+	
+	var _MessageList2 = _interopRequireDefault(_MessageList);
+	
+	var _MessageForm = __webpack_require__(/*! components/MessageForm.jsx */ 273);
+	
+	var _MessageForm2 = _interopRequireDefault(_MessageForm);
+	
+	var _ChangeNameForm = __webpack_require__(/*! components/ChangeNameForm.jsx */ 274);
+	
+	var _ChangeNameForm2 = _interopRequireDefault(_ChangeNameForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ChatApp = function (_Component) {
+	  _inherits(ChatApp, _Component);
+	
+	  function ChatApp() {
+	    _classCallCheck(this, ChatApp);
+	
+	    return _possibleConstructorReturn(this, (ChatApp.__proto__ || Object.getPrototypeOf(ChatApp)).apply(this, arguments));
+	  }
+	
+	  _createClass(ChatApp, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container-fluid', style: { height: '100%', minHeight: '100%' } },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row', id: 'nav' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-2 col-xs-4', id: 'githubDiv' },
+	            _react2.default.createElement(
+	              'a',
+	              { id: 'github', href: 'https://github.com/vanshady/ReactJS-Realtime-Chat/' },
+	              'Code on Github'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-10 col-xs-8', id: 'userNameDiv' },
+	            _react2.default.createElement(
+	              'h4',
+	              { id: 'userName' },
+	              ' ',
+	              this.props.name,
+	              ' '
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row', style: { height: '92%' } },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-2 col-xs-4', id: 'UsersBox' },
+	            _react2.default.createElement(_UsersList2.default, null),
+	            _react2.default.createElement(_ChangeNameForm2.default, {
+	              className: 'row'
+	            })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-10 col-xs-8', id: 'MessageBox' },
+	            _react2.default.createElement(_MessageList2.default, {
+	              id: 'MessageList',
+	              className: 'row'
+	            }),
+	            _react2.default.createElement(_MessageForm2.default, { className: 'row' })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ChatApp;
+	}(_react.Component);
+	
+	ChatApp.propTypes = {
+	  name: _react2.default.PropTypes.string.isRequired,
+	  changeName: _react2.default.PropTypes.func.isRequired
+	};
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    name: state.name
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    changeName: function changeName(name) {
+	      dispatch((0, _message.changeName)(name));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChatApp);
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ChatApp.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 217 */
+/*!***************************************!*\
+  !*** ./client/src/actions/message.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.OTHERS_CHANGE_NAME = exports.CHANGE_NAME = exports.DELETE_USER = exports.SEND_MESSAGE = exports.SET_NAME = exports.ADD_USER = exports.ADD_MESSAGE = exports.INIT = undefined;
+	exports.init = init;
+	exports.addMessage = addMessage;
+	exports.sendMessage = sendMessage;
+	exports.addUser = addUser;
+	exports.deleteUser = deleteUser;
+	exports.changeName = changeName;
+	exports.othersChangeName = othersChangeName;
+	
+	var _store = __webpack_require__(/*! ../store */ 218);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var INIT = exports.INIT = 'init';
+	var ADD_MESSAGE = exports.ADD_MESSAGE = 'add-message';
+	var ADD_USER = exports.ADD_USER = 'add-user';
+	var SET_NAME = exports.SET_NAME = 'set-name';
+	var SEND_MESSAGE = exports.SEND_MESSAGE = 'send-message';
+	var DELETE_USER = exports.DELETE_USER = 'delete-user';
+	var CHANGE_NAME = exports.CHANGE_NAME = 'change-name';
+	var OTHERS_CHANGE_NAME = exports.OTHERS_CHANGE_NAME = 'others-change-name';
+	
+	function init(users, messages, name) {
+	  return { type: INIT, users: users, messages: messages, name: name };
+	}
+	
+	function addMessage(message) {
+	  return { type: ADD_MESSAGE, message: message };
+	}
+	
+	function sendMessage(message) {
+	  return { type: SEND_MESSAGE, message: message };
+	}
+	
+	function addUser(user) {
+	  return { type: ADD_USER, user: user };
+	}
+	
+	function deleteUser(user) {
+	  return { type: DELETE_USER, user: user };
+	}
+	
+	function changeName(name) {
+	  return { type: CHANGE_NAME, oldName: _store2.default.getState().name, newName: name };
+	}
+	
+	function othersChangeName(oldName, newName) {
+	  return { type: OTHERS_CHANGE_NAME, oldName: oldName, newName: newName };
+	}
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "message.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 218 */
+/*!*****************************!*\
+  !*** ./client/src/store.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(/*! redux */ 189);
+	
+	var _index = __webpack_require__(/*! ./reducers/index */ 219);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _chat = __webpack_require__(/*! ./chat */ 220);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var preloadedState = JSON.parse(window.__PRELOADED_STATE__);
+	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_chat.chatMiddleware)(_redux.createStore);
+	var store = createStoreWithMiddleware(_index2.default, preloadedState);
+	
+	exports.default = store;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "store.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 219 */
+/*!**************************************!*\
+  !*** ./client/src/reducers/index.js ***!
+  \**************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.default = reducer;
+	
+	var _message = __webpack_require__(/*! actions/message */ 217);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function changeUser(users, oldName, newName) {
+	  var index = users.indexOf(oldName);
+	  return [].concat(_toConsumableArray(users.slice(0, index)), [newName], _toConsumableArray(users.slice(index + 1)));
+	}
+	
+	function deleteUser(users, name) {
+	  var index = users.indexOf(name);
+	  return [].concat(_toConsumableArray(users.slice(0, index)), _toConsumableArray(users.slice(index + 1)));
+	}
+	
+	function reducer(state, action) {
+	  if (!action) return _extends({}, state);
+	
+	  switch (action.type) {
+	    case _message.INIT:
+	      return { name: action.name, users: action.users, messages: action.messages };
+	    case _message.SET_NAME:
+	      return _extends({}, state, { name: action.name });
+	    case _message.ADD_MESSAGE:
+	    case _message.SEND_MESSAGE:
+	      return _extends({}, state, { messages: [].concat(_toConsumableArray(state.messages), [action.message]) });
+	    case _message.CHANGE_NAME:
+	      return _extends({}, state, {
+	        name: action.newName,
+	        users: changeUser(state.users, action.oldName, action.newName) });
+	    case _message.OTHERS_CHANGE_NAME:
+	      return _extends({}, state, { users: changeUser(state.users, action.oldName, action.newName) });
+	    case _message.ADD_USER:
+	      return _extends({}, state, { users: [].concat(_toConsumableArray(state.users), [action.user]) });
+	    case _message.DELETE_USER:
+	      return _extends({}, state, { users: deleteUser(state.users, action.user) });
+	    default:
+	      return state;
+	  }
+	}
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 220 */
 /*!****************************!*\
   !*** ./client/src/chat.js ***!
   \****************************/
@@ -24390,37 +24691,43 @@
 	    var users = data.users,
 	        messages = data.messages,
 	        name = data.name;
+	    // let newName = '';
+	    // if (store.getState().name) {
+	    //   newName = store.getState().name;
+	    // }
 	
-	    store.dispatch(actions.setName(name));
-	    store.dispatch(actions.setUsers(users));
-	    store.dispatch(actions.setMessages(messages));
+	    store.dispatch(actions.init(users, messages, name));
 	  });
 	  socket.on('send:message', function (message) {
 	    store.dispatch(actions.addMessage(message));
 	  });
-	  socket.on('user:join', function (name) {
+	  socket.on('user:join', function (_ref) {
+	    var name = _ref.name;
+	
 	    store.dispatch(actions.addUser(name));
 	  });
-	  socket.on('user:left', function (name) {
+	  socket.on('user:left', function (_ref2) {
+	    var name = _ref2.name;
+	
 	    store.dispatch(actions.deleteUser(name));
 	  });
-	  socket.on('change:name', function (_ref) {
-	    var oldName = _ref.oldName,
-	        newName = _ref.newName;
+	  socket.on('change:name', function (_ref3) {
+	    var oldName = _ref3.oldName,
+	        newName = _ref3.newName;
 	
 	    store.dispatch(actions.othersChangeName(oldName, newName));
 	  });
 	};
 	
-	var _socket = __webpack_require__(/*! socket.io-client */ 217);
+	var _socket = __webpack_require__(/*! socket.io-client */ 221);
 	
 	var _socket2 = _interopRequireDefault(_socket);
 	
-	var _jakobmattssonClientCookies = __webpack_require__(/*! jakobmattsson-client-cookies */ 265);
+	var _jakobmattssonClientCookies = __webpack_require__(/*! jakobmattsson-client-cookies */ 269);
 	
 	var _jakobmattssonClientCookies2 = _interopRequireDefault(_jakobmattssonClientCookies);
 	
-	var _message = __webpack_require__(/*! actions/message */ 266);
+	var _message = __webpack_require__(/*! actions/message */ 217);
 	
 	var actions = _interopRequireWildcard(_message);
 	
@@ -24437,10 +24744,10 @@
 	        if (action.type === actions.SEND_MESSAGE) {
 	          socket.emit('send:message', action.message);
 	        } else if (action.type === actions.CHANGE_NAME) {
-	          var newName = actions.newName;
+	          var newName = action.newName;
 	
 	          _jakobmattssonClientCookies2.default.set('name', newName);
-	          socket.emit('change:name', { name: newName });
+	          socket.emit('change:name', { newName: newName });
 	        }
 	      }
 	
@@ -24452,7 +24759,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "chat.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 217 */
+/* 221 */
 /*!*****************************************!*\
   !*** ./~/socket.io-client/lib/index.js ***!
   \*****************************************/
@@ -24463,10 +24770,10 @@
 	 * Module dependencies.
 	 */
 	
-	var url = __webpack_require__(/*! ./url */ 218);
-	var parser = __webpack_require__(/*! socket.io-parser */ 223);
-	var Manager = __webpack_require__(/*! ./manager */ 233);
-	var debug = __webpack_require__(/*! debug */ 220)('socket.io-client');
+	var url = __webpack_require__(/*! ./url */ 222);
+	var parser = __webpack_require__(/*! socket.io-parser */ 227);
+	var Manager = __webpack_require__(/*! ./manager */ 237);
+	var debug = __webpack_require__(/*! debug */ 224)('socket.io-client');
 	
 	/**
 	 * Module exports.
@@ -24565,12 +24872,12 @@
 	 * @api public
 	 */
 	
-	exports.Manager = __webpack_require__(/*! ./manager */ 233);
-	exports.Socket = __webpack_require__(/*! ./socket */ 260);
+	exports.Manager = __webpack_require__(/*! ./manager */ 237);
+	exports.Socket = __webpack_require__(/*! ./socket */ 264);
 
 
 /***/ },
-/* 218 */
+/* 222 */
 /*!***************************************!*\
   !*** ./~/socket.io-client/lib/url.js ***!
   \***************************************/
@@ -24581,8 +24888,8 @@
 	 * Module dependencies.
 	 */
 	
-	var parseuri = __webpack_require__(/*! parseuri */ 219);
-	var debug = __webpack_require__(/*! debug */ 220)('socket.io-client:url');
+	var parseuri = __webpack_require__(/*! parseuri */ 223);
+	var debug = __webpack_require__(/*! debug */ 224)('socket.io-client:url');
 	
 	/**
 	 * Module exports.
@@ -24655,7 +24962,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 219 */
+/* 223 */
 /*!*****************************!*\
   !*** ./~/parseuri/index.js ***!
   \*****************************/
@@ -24703,7 +25010,7 @@
 
 
 /***/ },
-/* 220 */
+/* 224 */
 /*!****************************!*\
   !*** ./~/debug/browser.js ***!
   \****************************/
@@ -24716,7 +25023,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(/*! ./debug */ 221);
+	exports = module.exports = __webpack_require__(/*! ./debug */ 225);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -24890,7 +25197,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../process/browser.js */ 3)))
 
 /***/ },
-/* 221 */
+/* 225 */
 /*!**************************!*\
   !*** ./~/debug/debug.js ***!
   \**************************/
@@ -24909,7 +25216,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(/*! ms */ 222);
+	exports.humanize = __webpack_require__(/*! ms */ 226);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -25099,7 +25406,7 @@
 
 
 /***/ },
-/* 222 */
+/* 226 */
 /*!*******************************!*\
   !*** ./~/debug/~/ms/index.js ***!
   \*******************************/
@@ -25257,7 +25564,7 @@
 
 
 /***/ },
-/* 223 */
+/* 227 */
 /*!*************************************!*\
   !*** ./~/socket.io-parser/index.js ***!
   \*************************************/
@@ -25268,11 +25575,11 @@
 	 * Module dependencies.
 	 */
 	
-	var debug = __webpack_require__(/*! debug */ 224)('socket.io-parser');
-	var json = __webpack_require__(/*! json3 */ 227);
-	var Emitter = __webpack_require__(/*! component-emitter */ 229);
-	var binary = __webpack_require__(/*! ./binary */ 230);
-	var isBuf = __webpack_require__(/*! ./is-buffer */ 232);
+	var debug = __webpack_require__(/*! debug */ 228)('socket.io-parser');
+	var json = __webpack_require__(/*! json3 */ 231);
+	var Emitter = __webpack_require__(/*! component-emitter */ 233);
+	var binary = __webpack_require__(/*! ./binary */ 234);
+	var isBuf = __webpack_require__(/*! ./is-buffer */ 236);
 	
 	/**
 	 * Protocol version.
@@ -25670,7 +25977,7 @@
 
 
 /***/ },
-/* 224 */
+/* 228 */
 /*!***********************************************!*\
   !*** ./~/socket.io-parser/~/debug/browser.js ***!
   \***********************************************/
@@ -25683,7 +25990,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(/*! ./debug */ 225);
+	exports = module.exports = __webpack_require__(/*! ./debug */ 229);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -25847,7 +26154,7 @@
 
 
 /***/ },
-/* 225 */
+/* 229 */
 /*!*********************************************!*\
   !*** ./~/socket.io-parser/~/debug/debug.js ***!
   \*********************************************/
@@ -25866,7 +26173,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(/*! ms */ 226);
+	exports.humanize = __webpack_require__(/*! ms */ 230);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -26053,7 +26360,7 @@
 
 
 /***/ },
-/* 226 */
+/* 230 */
 /*!***********************!*\
   !*** ./~/ms/index.js ***!
   \***********************/
@@ -26187,7 +26494,7 @@
 
 
 /***/ },
-/* 227 */
+/* 231 */
 /*!******************************!*\
   !*** ./~/json3/lib/json3.js ***!
   \******************************/
@@ -26197,7 +26504,7 @@
 	;(function () {
 	  // Detect the `define` function exposed by asynchronous module loaders. The
 	  // strict `define` check is necessary for compatibility with `r.js`.
-	  var isLoader = "function" === "function" && __webpack_require__(/*! !webpack amd options */ 228);
+	  var isLoader = "function" === "function" && __webpack_require__(/*! !webpack amd options */ 232);
 	
 	  // A set of types used to distinguish objects from primitives.
 	  var objectTypes = {
@@ -27099,7 +27406,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../webpack/buildin/module.js */ 203)(module), (function() { return this; }())))
 
 /***/ },
-/* 228 */
+/* 232 */
 /*!****************************************!*\
   !*** (webpack)/buildin/amd-options.js ***!
   \****************************************/
@@ -27110,7 +27417,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 229 */
+/* 233 */
 /*!*********************************************************!*\
   !*** ./~/socket.io-parser/~/component-emitter/index.js ***!
   \*********************************************************/
@@ -27283,7 +27590,7 @@
 
 
 /***/ },
-/* 230 */
+/* 234 */
 /*!**************************************!*\
   !*** ./~/socket.io-parser/binary.js ***!
   \**************************************/
@@ -27295,8 +27602,8 @@
 	 * Module requirements
 	 */
 	
-	var isArray = __webpack_require__(/*! isarray */ 231);
-	var isBuf = __webpack_require__(/*! ./is-buffer */ 232);
+	var isArray = __webpack_require__(/*! isarray */ 235);
+	var isBuf = __webpack_require__(/*! ./is-buffer */ 236);
 	
 	/**
 	 * Replaces every Buffer | ArrayBuffer in packet with a numbered placeholder.
@@ -27434,7 +27741,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 231 */
+/* 235 */
 /*!****************************!*\
   !*** ./~/isarray/index.js ***!
   \****************************/
@@ -27446,7 +27753,7 @@
 
 
 /***/ },
-/* 232 */
+/* 236 */
 /*!*****************************************!*\
   !*** ./~/socket.io-parser/is-buffer.js ***!
   \*****************************************/
@@ -27469,7 +27776,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 233 */
+/* 237 */
 /*!*******************************************!*\
   !*** ./~/socket.io-client/lib/manager.js ***!
   \*******************************************/
@@ -27480,15 +27787,15 @@
 	 * Module dependencies.
 	 */
 	
-	var eio = __webpack_require__(/*! engine.io-client */ 234);
-	var Socket = __webpack_require__(/*! ./socket */ 260);
-	var Emitter = __webpack_require__(/*! component-emitter */ 251);
-	var parser = __webpack_require__(/*! socket.io-parser */ 223);
-	var on = __webpack_require__(/*! ./on */ 262);
-	var bind = __webpack_require__(/*! component-bind */ 263);
-	var debug = __webpack_require__(/*! debug */ 220)('socket.io-client:manager');
-	var indexOf = __webpack_require__(/*! indexof */ 258);
-	var Backoff = __webpack_require__(/*! backo2 */ 264);
+	var eio = __webpack_require__(/*! engine.io-client */ 238);
+	var Socket = __webpack_require__(/*! ./socket */ 264);
+	var Emitter = __webpack_require__(/*! component-emitter */ 255);
+	var parser = __webpack_require__(/*! socket.io-parser */ 227);
+	var on = __webpack_require__(/*! ./on */ 266);
+	var bind = __webpack_require__(/*! component-bind */ 267);
+	var debug = __webpack_require__(/*! debug */ 224)('socket.io-client:manager');
+	var indexOf = __webpack_require__(/*! indexof */ 262);
+	var Backoff = __webpack_require__(/*! backo2 */ 268);
 	
 	/**
 	 * IE6+ hasOwnProperty
@@ -28038,25 +28345,25 @@
 
 
 /***/ },
-/* 234 */
+/* 238 */
 /*!*************************************!*\
   !*** ./~/engine.io-client/index.js ***!
   \*************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(/*! ./lib/index */ 235);
+	module.exports = __webpack_require__(/*! ./lib/index */ 239);
 
 
 /***/ },
-/* 235 */
+/* 239 */
 /*!*****************************************!*\
   !*** ./~/engine.io-client/lib/index.js ***!
   \*****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	module.exports = __webpack_require__(/*! ./socket */ 236);
+	module.exports = __webpack_require__(/*! ./socket */ 240);
 	
 	/**
 	 * Exports parser
@@ -28064,11 +28371,11 @@
 	 * @api public
 	 *
 	 */
-	module.exports.parser = __webpack_require__(/*! engine.io-parser */ 243);
+	module.exports.parser = __webpack_require__(/*! engine.io-parser */ 247);
 
 
 /***/ },
-/* 236 */
+/* 240 */
 /*!******************************************!*\
   !*** ./~/engine.io-client/lib/socket.js ***!
   \******************************************/
@@ -28078,14 +28385,14 @@
 	 * Module dependencies.
 	 */
 	
-	var transports = __webpack_require__(/*! ./transports/index */ 237);
-	var Emitter = __webpack_require__(/*! component-emitter */ 251);
-	var debug = __webpack_require__(/*! debug */ 220)('engine.io-client:socket');
-	var index = __webpack_require__(/*! indexof */ 258);
-	var parser = __webpack_require__(/*! engine.io-parser */ 243);
-	var parseuri = __webpack_require__(/*! parseuri */ 219);
-	var parsejson = __webpack_require__(/*! parsejson */ 259);
-	var parseqs = __webpack_require__(/*! parseqs */ 252);
+	var transports = __webpack_require__(/*! ./transports/index */ 241);
+	var Emitter = __webpack_require__(/*! component-emitter */ 255);
+	var debug = __webpack_require__(/*! debug */ 224)('engine.io-client:socket');
+	var index = __webpack_require__(/*! indexof */ 262);
+	var parser = __webpack_require__(/*! engine.io-parser */ 247);
+	var parseuri = __webpack_require__(/*! parseuri */ 223);
+	var parsejson = __webpack_require__(/*! parsejson */ 263);
+	var parseqs = __webpack_require__(/*! parseqs */ 256);
 	
 	/**
 	 * Module exports.
@@ -28217,9 +28524,9 @@
 	 */
 	
 	Socket.Socket = Socket;
-	Socket.Transport = __webpack_require__(/*! ./transport */ 242);
-	Socket.transports = __webpack_require__(/*! ./transports/index */ 237);
-	Socket.parser = __webpack_require__(/*! engine.io-parser */ 243);
+	Socket.Transport = __webpack_require__(/*! ./transport */ 246);
+	Socket.transports = __webpack_require__(/*! ./transports/index */ 241);
+	Socket.parser = __webpack_require__(/*! engine.io-parser */ 247);
 	
 	/**
 	 * Creates transport of the given type.
@@ -28816,7 +29123,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 237 */
+/* 241 */
 /*!****************************************************!*\
   !*** ./~/engine.io-client/lib/transports/index.js ***!
   \****************************************************/
@@ -28826,10 +29133,10 @@
 	 * Module dependencies
 	 */
 	
-	var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 238);
-	var XHR = __webpack_require__(/*! ./polling-xhr */ 240);
-	var JSONP = __webpack_require__(/*! ./polling-jsonp */ 255);
-	var websocket = __webpack_require__(/*! ./websocket */ 256);
+	var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 242);
+	var XHR = __webpack_require__(/*! ./polling-xhr */ 244);
+	var JSONP = __webpack_require__(/*! ./polling-jsonp */ 259);
+	var websocket = __webpack_require__(/*! ./websocket */ 260);
 	
 	/**
 	 * Export transports.
@@ -28879,7 +29186,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 238 */
+/* 242 */
 /*!**************************************************!*\
   !*** ./~/engine.io-client/lib/xmlhttprequest.js ***!
   \**************************************************/
@@ -28887,7 +29194,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(global) {// browser shim for xmlhttprequest module
 	
-	var hasCORS = __webpack_require__(/*! has-cors */ 239);
+	var hasCORS = __webpack_require__(/*! has-cors */ 243);
 	
 	module.exports = function (opts) {
 	  var xdomain = opts.xdomain;
@@ -28926,7 +29233,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 239 */
+/* 243 */
 /*!*****************************!*\
   !*** ./~/has-cors/index.js ***!
   \*****************************/
@@ -28952,7 +29259,7 @@
 
 
 /***/ },
-/* 240 */
+/* 244 */
 /*!**********************************************************!*\
   !*** ./~/engine.io-client/lib/transports/polling-xhr.js ***!
   \**********************************************************/
@@ -28962,11 +29269,11 @@
 	 * Module requirements.
 	 */
 	
-	var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 238);
-	var Polling = __webpack_require__(/*! ./polling */ 241);
-	var Emitter = __webpack_require__(/*! component-emitter */ 251);
-	var inherit = __webpack_require__(/*! component-inherit */ 253);
-	var debug = __webpack_require__(/*! debug */ 220)('engine.io-client:polling-xhr');
+	var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 242);
+	var Polling = __webpack_require__(/*! ./polling */ 245);
+	var Emitter = __webpack_require__(/*! component-emitter */ 255);
+	var inherit = __webpack_require__(/*! component-inherit */ 257);
+	var debug = __webpack_require__(/*! debug */ 224)('engine.io-client:polling-xhr');
 	
 	/**
 	 * Module exports.
@@ -29386,7 +29693,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 241 */
+/* 245 */
 /*!******************************************************!*\
   !*** ./~/engine.io-client/lib/transports/polling.js ***!
   \******************************************************/
@@ -29396,12 +29703,12 @@
 	 * Module dependencies.
 	 */
 	
-	var Transport = __webpack_require__(/*! ../transport */ 242);
-	var parseqs = __webpack_require__(/*! parseqs */ 252);
-	var parser = __webpack_require__(/*! engine.io-parser */ 243);
-	var inherit = __webpack_require__(/*! component-inherit */ 253);
-	var yeast = __webpack_require__(/*! yeast */ 254);
-	var debug = __webpack_require__(/*! debug */ 220)('engine.io-client:polling');
+	var Transport = __webpack_require__(/*! ../transport */ 246);
+	var parseqs = __webpack_require__(/*! parseqs */ 256);
+	var parser = __webpack_require__(/*! engine.io-parser */ 247);
+	var inherit = __webpack_require__(/*! component-inherit */ 257);
+	var yeast = __webpack_require__(/*! yeast */ 258);
+	var debug = __webpack_require__(/*! debug */ 224)('engine.io-client:polling');
 	
 	/**
 	 * Module exports.
@@ -29414,7 +29721,7 @@
 	 */
 	
 	var hasXHR2 = (function () {
-	  var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 238);
+	  var XMLHttpRequest = __webpack_require__(/*! xmlhttprequest-ssl */ 242);
 	  var xhr = new XMLHttpRequest({ xdomain: false });
 	  return null != xhr.responseType;
 	})();
@@ -29640,7 +29947,7 @@
 
 
 /***/ },
-/* 242 */
+/* 246 */
 /*!*********************************************!*\
   !*** ./~/engine.io-client/lib/transport.js ***!
   \*********************************************/
@@ -29650,8 +29957,8 @@
 	 * Module dependencies.
 	 */
 	
-	var parser = __webpack_require__(/*! engine.io-parser */ 243);
-	var Emitter = __webpack_require__(/*! component-emitter */ 251);
+	var parser = __webpack_require__(/*! engine.io-parser */ 247);
+	var Emitter = __webpack_require__(/*! component-emitter */ 255);
 	
 	/**
 	 * Module exports.
@@ -29806,7 +30113,7 @@
 
 
 /***/ },
-/* 243 */
+/* 247 */
 /*!*******************************************!*\
   !*** ./~/engine.io-parser/lib/browser.js ***!
   \*******************************************/
@@ -29816,15 +30123,15 @@
 	 * Module dependencies.
 	 */
 	
-	var keys = __webpack_require__(/*! ./keys */ 244);
-	var hasBinary = __webpack_require__(/*! has-binary */ 245);
-	var sliceBuffer = __webpack_require__(/*! arraybuffer.slice */ 246);
-	var after = __webpack_require__(/*! after */ 247);
-	var utf8 = __webpack_require__(/*! wtf-8 */ 248);
+	var keys = __webpack_require__(/*! ./keys */ 248);
+	var hasBinary = __webpack_require__(/*! has-binary */ 249);
+	var sliceBuffer = __webpack_require__(/*! arraybuffer.slice */ 250);
+	var after = __webpack_require__(/*! after */ 251);
+	var utf8 = __webpack_require__(/*! wtf-8 */ 252);
 	
 	var base64encoder;
 	if (global && global.ArrayBuffer) {
-	  base64encoder = __webpack_require__(/*! base64-arraybuffer */ 249);
+	  base64encoder = __webpack_require__(/*! base64-arraybuffer */ 253);
 	}
 	
 	/**
@@ -29882,7 +30189,7 @@
 	 * Create a blob api even for blob builder when vendor prefixes exist
 	 */
 	
-	var Blob = __webpack_require__(/*! blob */ 250);
+	var Blob = __webpack_require__(/*! blob */ 254);
 	
 	/**
 	 * Encodes a packet.
@@ -30425,7 +30732,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 244 */
+/* 248 */
 /*!****************************************!*\
   !*** ./~/engine.io-parser/lib/keys.js ***!
   \****************************************/
@@ -30453,7 +30760,7 @@
 
 
 /***/ },
-/* 245 */
+/* 249 */
 /*!*******************************!*\
   !*** ./~/has-binary/index.js ***!
   \*******************************/
@@ -30464,7 +30771,7 @@
 	 * Module requirements.
 	 */
 	
-	var isArray = __webpack_require__(/*! isarray */ 231);
+	var isArray = __webpack_require__(/*! isarray */ 235);
 	
 	/**
 	 * Module exports.
@@ -30522,7 +30829,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 246 */
+/* 250 */
 /*!**************************************!*\
   !*** ./~/arraybuffer.slice/index.js ***!
   \**************************************/
@@ -30560,7 +30867,7 @@
 
 
 /***/ },
-/* 247 */
+/* 251 */
 /*!**************************!*\
   !*** ./~/after/index.js ***!
   \**************************/
@@ -30597,7 +30904,7 @@
 
 
 /***/ },
-/* 248 */
+/* 252 */
 /*!**************************!*\
   !*** ./~/wtf-8/wtf-8.js ***!
   \**************************/
@@ -30839,7 +31146,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../webpack/buildin/module.js */ 203)(module), (function() { return this; }())))
 
 /***/ },
-/* 249 */
+/* 253 */
 /*!********************************************************!*\
   !*** ./~/base64-arraybuffer/lib/base64-arraybuffer.js ***!
   \********************************************************/
@@ -30915,7 +31222,7 @@
 
 
 /***/ },
-/* 250 */
+/* 254 */
 /*!*************************!*\
   !*** ./~/blob/index.js ***!
   \*************************/
@@ -31021,7 +31328,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 251 */
+/* 255 */
 /*!**************************************!*\
   !*** ./~/component-emitter/index.js ***!
   \**************************************/
@@ -31193,7 +31500,7 @@
 
 
 /***/ },
-/* 252 */
+/* 256 */
 /*!****************************!*\
   !*** ./~/parseqs/index.js ***!
   \****************************/
@@ -31239,7 +31546,7 @@
 
 
 /***/ },
-/* 253 */
+/* 257 */
 /*!**************************************!*\
   !*** ./~/component-inherit/index.js ***!
   \**************************************/
@@ -31254,7 +31561,7 @@
 	};
 
 /***/ },
-/* 254 */
+/* 258 */
 /*!**************************!*\
   !*** ./~/yeast/index.js ***!
   \**************************/
@@ -31331,7 +31638,7 @@
 
 
 /***/ },
-/* 255 */
+/* 259 */
 /*!************************************************************!*\
   !*** ./~/engine.io-client/lib/transports/polling-jsonp.js ***!
   \************************************************************/
@@ -31342,8 +31649,8 @@
 	 * Module requirements.
 	 */
 	
-	var Polling = __webpack_require__(/*! ./polling */ 241);
-	var inherit = __webpack_require__(/*! component-inherit */ 253);
+	var Polling = __webpack_require__(/*! ./polling */ 245);
+	var inherit = __webpack_require__(/*! component-inherit */ 257);
 	
 	/**
 	 * Module exports.
@@ -31572,7 +31879,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 256 */
+/* 260 */
 /*!********************************************************!*\
   !*** ./~/engine.io-client/lib/transports/websocket.js ***!
   \********************************************************/
@@ -31582,17 +31889,17 @@
 	 * Module dependencies.
 	 */
 	
-	var Transport = __webpack_require__(/*! ../transport */ 242);
-	var parser = __webpack_require__(/*! engine.io-parser */ 243);
-	var parseqs = __webpack_require__(/*! parseqs */ 252);
-	var inherit = __webpack_require__(/*! component-inherit */ 253);
-	var yeast = __webpack_require__(/*! yeast */ 254);
-	var debug = __webpack_require__(/*! debug */ 220)('engine.io-client:websocket');
+	var Transport = __webpack_require__(/*! ../transport */ 246);
+	var parser = __webpack_require__(/*! engine.io-parser */ 247);
+	var parseqs = __webpack_require__(/*! parseqs */ 256);
+	var inherit = __webpack_require__(/*! component-inherit */ 257);
+	var yeast = __webpack_require__(/*! yeast */ 258);
+	var debug = __webpack_require__(/*! debug */ 224)('engine.io-client:websocket');
 	var BrowserWebSocket = global.WebSocket || global.MozWebSocket;
 	var NodeWebSocket;
 	if (typeof window === 'undefined') {
 	  try {
-	    NodeWebSocket = __webpack_require__(/*! ws */ 257);
+	    NodeWebSocket = __webpack_require__(/*! ws */ 261);
 	  } catch (e) { }
 	}
 	
@@ -31867,7 +32174,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 257 */
+/* 261 */
 /*!********************!*\
   !*** ws (ignored) ***!
   \********************/
@@ -31876,7 +32183,7 @@
 	/* (ignored) */
 
 /***/ },
-/* 258 */
+/* 262 */
 /*!****************************!*\
   !*** ./~/indexof/index.js ***!
   \****************************/
@@ -31894,7 +32201,7 @@
 	};
 
 /***/ },
-/* 259 */
+/* 263 */
 /*!******************************!*\
   !*** ./~/parsejson/index.js ***!
   \******************************/
@@ -31935,7 +32242,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 260 */
+/* 264 */
 /*!******************************************!*\
   !*** ./~/socket.io-client/lib/socket.js ***!
   \******************************************/
@@ -31946,13 +32253,13 @@
 	 * Module dependencies.
 	 */
 	
-	var parser = __webpack_require__(/*! socket.io-parser */ 223);
-	var Emitter = __webpack_require__(/*! component-emitter */ 251);
-	var toArray = __webpack_require__(/*! to-array */ 261);
-	var on = __webpack_require__(/*! ./on */ 262);
-	var bind = __webpack_require__(/*! component-bind */ 263);
-	var debug = __webpack_require__(/*! debug */ 220)('socket.io-client:socket');
-	var hasBin = __webpack_require__(/*! has-binary */ 245);
+	var parser = __webpack_require__(/*! socket.io-parser */ 227);
+	var Emitter = __webpack_require__(/*! component-emitter */ 255);
+	var toArray = __webpack_require__(/*! to-array */ 265);
+	var on = __webpack_require__(/*! ./on */ 266);
+	var bind = __webpack_require__(/*! component-bind */ 267);
+	var debug = __webpack_require__(/*! debug */ 224)('socket.io-client:socket');
+	var hasBin = __webpack_require__(/*! has-binary */ 249);
 	
 	/**
 	 * Module exports.
@@ -32363,7 +32670,7 @@
 
 
 /***/ },
-/* 261 */
+/* 265 */
 /*!*****************************!*\
   !*** ./~/to-array/index.js ***!
   \*****************************/
@@ -32385,7 +32692,7 @@
 
 
 /***/ },
-/* 262 */
+/* 266 */
 /*!**************************************!*\
   !*** ./~/socket.io-client/lib/on.js ***!
   \**************************************/
@@ -32418,7 +32725,7 @@
 
 
 /***/ },
-/* 263 */
+/* 267 */
 /*!***********************************!*\
   !*** ./~/component-bind/index.js ***!
   \***********************************/
@@ -32450,7 +32757,7 @@
 
 
 /***/ },
-/* 264 */
+/* 268 */
 /*!***************************!*\
   !*** ./~/backo2/index.js ***!
   \***************************/
@@ -32544,7 +32851,7 @@
 
 
 /***/ },
-/* 265 */
+/* 269 */
 /*!***************************************************!*\
   !*** ./~/jakobmattsson-client-cookies/cookies.js ***!
   \***************************************************/
@@ -32663,320 +32970,6 @@
 	})(document);
 
 /***/ },
-/* 266 */
-/*!***************************************!*\
-  !*** ./client/src/actions/message.js ***!
-  \***************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.OTHERS_CHANGE_NAME = exports.CHANGE_NAME = exports.DELETE_USER = exports.SEND_MESSAGE = exports.SET_USERS = exports.SET_MESSAGES = exports.SET_NAME = exports.ADD_USER = exports.ADD_MESSAGE = undefined;
-	exports.addMessage = addMessage;
-	exports.sendMessage = sendMessage;
-	exports.addUser = addUser;
-	exports.deleteUser = deleteUser;
-	exports.changeName = changeName;
-	exports.othersChangeName = othersChangeName;
-	
-	var _store = __webpack_require__(/*! ../store */ 267);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ADD_MESSAGE = exports.ADD_MESSAGE = 'add-message';
-	var ADD_USER = exports.ADD_USER = 'add-user';
-	var SET_NAME = exports.SET_NAME = 'set-name';
-	var SET_MESSAGES = exports.SET_MESSAGES = 'set-messages';
-	var SET_USERS = exports.SET_USERS = 'set-users';
-	var SEND_MESSAGE = exports.SEND_MESSAGE = 'send-message';
-	var DELETE_USER = exports.DELETE_USER = 'delete-user';
-	var CHANGE_NAME = exports.CHANGE_NAME = 'change-name';
-	var OTHERS_CHANGE_NAME = exports.OTHERS_CHANGE_NAME = 'others-change-name';
-	
-	function addMessage(message) {
-	  return { type: ADD_MESSAGE, message: message };
-	}
-	
-	function sendMessage(message) {
-	  return { type: SEND_MESSAGE, message: message };
-	}
-	
-	function addUser(user) {
-	  return { type: ADD_USER, user: user };
-	}
-	
-	function deleteUser(user) {
-	  return { type: DELETE_USER, user: user };
-	}
-	
-	function changeName(name) {
-	  return { type: CHANGE_NAME, oldName: _store2.default.getState().name, newName: name };
-	}
-	
-	function othersChangeName(oldName, newName) {
-	  return { type: OTHERS_CHANGE_NAME, oldName: oldName, newName: newName };
-	}
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "message.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 267 */
-/*!*****************************!*\
-  !*** ./client/src/store.js ***!
-  \*****************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(/*! redux */ 189);
-	
-	var _index = __webpack_require__(/*! ./reducers/index */ 268);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _chat = __webpack_require__(/*! ./chat */ 216);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var preloadedState = JSON.parse(window.__PRELOADED_STATE__);
-	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_chat.chatMiddleware)(_redux.createStore);
-	var store = createStoreWithMiddleware((0, _index2.default)(preloadedState));
-	exports.default = store;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "store.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 268 */
-/*!**************************************!*\
-  !*** ./client/src/reducers/index.js ***!
-  \**************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	exports.default = function (initialState) {
-	  function setName() {
-	    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.name;
-	    var action = arguments[1];
-	
-	    if (action.type === _message.SET_NAME || action.type === _message.CHANGE_NAME) {
-	      return action.name;
-	    }
-	
-	    return name;
-	  }
-	
-	  function setMessages() {
-	    var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.messages;
-	    var action = arguments[1];
-	
-	    if (action.type === _message.SET_MESSAGES) {
-	      return action.messages;
-	    }
-	
-	    return messages;
-	  }
-	
-	  function setUsers() {
-	    var users = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.users;
-	    var action = arguments[1];
-	
-	    if (action.type === _message.SET_USERS) {
-	      return action.users;
-	    }
-	
-	    return users;
-	  }
-	
-	  function addMessage() {
-	    var messages = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.messages;
-	    var action = arguments[1];
-	
-	    if (action.type === _message.ADD_MESSAGE || action.type === _message.SEND_MESSAGE) {
-	      messages.map(function (message) {
-	        return Object.assign({}, message);
-	      });
-	      messages.push(Object.assign({}, action.message));
-	      return messages;
-	    }
-	
-	    return messages;
-	  }
-	
-	  function changeName() {
-	    var users = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.users;
-	    var action = arguments[1];
-	
-	    if (action.type === _message.CHANGE_NAME || action.type === _message.OTHERS_CHANGE_NAME) {
-	      var index = users.indexOf(action.oldName);
-	      return [].concat(_toConsumableArray(users.slice(0, index)), [action.newName], _toConsumableArray(users.slice(index + 1)));
-	    }
-	
-	    return users;
-	  }
-	
-	  function changeUsers() {
-	    var users = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState.users;
-	    var action = arguments[1];
-	
-	    switch (action.type) {
-	      case _message.ADD_USER:
-	        return [].concat(_toConsumableArray(users), [action.name]);
-	      case _message.DELETE_USER:
-	        var index = users.indexOf(action.name);
-	        return [].concat(_toConsumableArray(users.slice(0, index)), _toConsumableArray(users.slice(index + 1)));
-	      default:
-	        return users;
-	    }
-	  }
-	
-	  return (0, _redux.combineReducers)({ setName: setName, setMessages: setMessages, setUsers: setUsers, addMessage: addMessage, changeName: changeName, changeUsers: changeUsers });
-	};
-	
-	var _redux = __webpack_require__(/*! redux */ 189);
-	
-	var _message = __webpack_require__(/*! actions/message */ 266);
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 269 */
-/*!*******************************************!*\
-  !*** ./client/src/components/ChatApp.jsx ***!
-  \*******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _jakobmattssonClientCookies = __webpack_require__(/*! jakobmattsson-client-cookies */ 265);
-	
-	var _jakobmattssonClientCookies2 = _interopRequireDefault(_jakobmattssonClientCookies);
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
-	
-	var _message = __webpack_require__(/*! actions/message */ 266);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var UsersList = __webpack_require__(/*! components/UsersList.jsx */ 270);
-	var MessageList = __webpack_require__(/*! components/MessageList.jsx */ 271);
-	var MessageForm = __webpack_require__(/*! components/MessageForm.jsx */ 273);
-	var ChangeNameForm = __webpack_require__(/*! components/ChangeNameForm.jsx */ 274);
-	
-	var ChatApp = _react2.default.createClass({
-	  displayName: 'ChatApp',
-	
-	  propTypes: {
-	    name: _react2.default.PropTypes.string.isRequired,
-	    changeName: _react2.default.PropTypes.func.isRequired
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    if (_jakobmattssonClientCookies2.default.get('name')) this.props.changeName(_jakobmattssonClientCookies2.default.get('name'));
-	  },
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'container-fluid', style: { height: '100%', minHeight: '100%' } },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row', id: 'nav' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-md-2 col-xs-4', id: 'githubDiv' },
-	          _react2.default.createElement(
-	            'a',
-	            { id: 'github', href: 'https://github.com/vanshady/ReactJS-Realtime-Chat/' },
-	            'Code on Github'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-md-10 col-xs-8', id: 'userNameDiv' },
-	          _react2.default.createElement(
-	            'h4',
-	            { id: 'userName' },
-	            ' ',
-	            this.props.name,
-	            ' '
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row', style: { height: '92%' } },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-md-2 col-xs-4', id: 'UsersBox' },
-	          _react2.default.createElement(UsersList, null),
-	          _react2.default.createElement(ChangeNameForm, {
-	            className: 'row'
-	          })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-md-10 col-xs-8', id: 'MessageBox' },
-	          _react2.default.createElement(MessageList, {
-	            id: 'MessageList',
-	            className: 'row'
-	          }),
-	          _react2.default.createElement(MessageForm, { className: 'row' })
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    name: state.name
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    changeName: function changeName(name) {
-	      dispatch((0, _message.changeName)(name));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChatApp);
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ChatApp.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
 /* 270 */
 /*!*********************************************!*\
   !*** ./client/src/components/UsersList.jsx ***!
@@ -33032,7 +33025,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
-	    messages: state.messages
+	    users: state.users
 	  };
 	};
 	
@@ -33173,7 +33166,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _message = __webpack_require__(/*! actions/message */ 266);
+	var _message = __webpack_require__(/*! actions/message */ 217);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -33181,11 +33174,19 @@
 	  displayName: 'MessageForm',
 	
 	  propTypes: {
+	    name: _react2.default.PropTypes.string.isRequired,
 	    sendMessage: _react2.default.PropTypes.func.isRequired
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    return { text: '' };
+	  },
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	    if (this.state.text && this.state.text.length > 0) {
+	      this.props.sendMessage({ user: this.props.name, text: this.state.text });
+	      this.setState({ text: '' });
+	    }
 	  },
 	  changeHandler: function changeHandler(e) {
 	    this.setState({ text: e.target.value });
@@ -33196,7 +33197,7 @@
 	      { className: 'message_form_div' },
 	      _react2.default.createElement(
 	        'form',
-	        { className: 'message_form', onSubmit: this.sendMessage, autoComplete: 'off' },
+	        { className: 'message_form', onSubmit: this.handleSubmit, autoComplete: 'off' },
 	        _react2.default.createElement('input', {
 	          type: 'message',
 	          placeholder: 'Type a message...',
@@ -33217,8 +33218,8 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    sendMessage: function sendMessage(name) {
-	      dispatch((0, _message.sendMessage)(name));
+	    sendMessage: function sendMessage(message) {
+	      dispatch((0, _message.sendMessage)(message));
 	    }
 	  };
 	};
@@ -33248,7 +33249,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _message = __webpack_require__(/*! actions/message */ 266);
+	var _message = __webpack_require__(/*! actions/message */ 217);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	

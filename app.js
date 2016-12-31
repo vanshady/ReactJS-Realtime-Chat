@@ -11,7 +11,6 @@ const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 
 /* Configuration */
-app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/client/public')));
 app.set('port', port);
 app.use(cors());

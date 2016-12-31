@@ -1,23 +1,13 @@
-import Cookies from 'jakobmattsson-client-cookies';
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeName } from 'actions/message';
 
-const UsersList = require('components/UsersList.jsx');
-const MessageList = require('components/MessageList.jsx');
-const MessageForm = require('components/MessageForm.jsx');
-const ChangeNameForm = require('components/ChangeNameForm.jsx');
+import UsersList from 'components/UsersList.jsx';
+import MessageList from 'components/MessageList.jsx';
+import MessageForm from 'components/MessageForm.jsx';
+import ChangeNameForm from 'components/ChangeNameForm.jsx';
 
-const ChatApp = React.createClass({
-  propTypes: {
-    name: React.PropTypes.string.isRequired,
-    changeName: React.PropTypes.func.isRequired,
-  },
-
-  componentDidMount() {
-    if (Cookies.get('name')) this.props.changeName(Cookies.get('name'));
-  },
-
+class ChatApp extends Component {
   render() {
     return (
       <div className="container-fluid" style={{ height: '100%', minHeight: '100%' }} >
@@ -46,8 +36,13 @@ const ChatApp = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
+
+ChatApp.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  changeName: React.PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   name: state.name,
