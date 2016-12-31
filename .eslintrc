@@ -9,10 +9,12 @@
       "react/prefer-stateless-function": 0,
       "no-console": 0,
       "prefer-template": 0,
-      "no-mixed-operators": "off"
+      "no-mixed-operators": "off",
+      "no-case-declarations": "off"
     },
     "env": {
       "browser": true,
-      "es6": true
+      "es6": true,
+      "commonjs": true
     }
 }

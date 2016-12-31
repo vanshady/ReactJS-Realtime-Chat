@@ -1,14 +1,21 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const APP_DIR = path.resolve(__dirname, 'client/src');
-const BUILD_DIR = path.resolve(__dirname, 'client/public/js');
+const CLIENT_DIR = path.resolve(__dirname, 'client/src');
+const DIST_DIR = path.resolve(__dirname, 'client/public/js');
 
 const config = {
-  entry: APP_DIR + '/app.jsx',
+  entry: CLIENT_DIR + '/index.jsx',
   output: {
-    path: BUILD_DIR,
+    path: DIST_DIR,
     filename: 'bundle.js',
+  },
+  resolve: {
+    alias: {
+      components: path.resolve(CLIENT_DIR, 'components'),
+      reducers: path.resolve(CLIENT_DIR, 'reducers'),
+      actions: path.resolve(CLIENT_DIR, 'actions'),
+    },
   },
   debug: true,
   devtool: 'source-map',
