@@ -2,8 +2,8 @@ const React = require('react');
 const { createStore } = require('redux');
 const { Provider } = require('react-redux');
 const { renderToString } = require('react-dom/server');
-const reducer = require('../client/src/reducers/index.js');
-const ChatApp = require('../client/src/components/ChatApp.jsx');
+const reducer = require('../client/src/reducers/index.js').default;
+const ChatApp = require('../client/src/components/ChatApp.jsx').default;
 const redis = require('redis');
 
 function renderFullPage(html, preloadedState) {
@@ -29,7 +29,7 @@ function renderFullPage(html, preloadedState) {
     </head>
 
     <body>
-        <div id="app">${html}</div>
+        <div id="app">${process.env.NODE_ENV === 'production' ? html : `<div>${html}</div>`}</div>
         <script>
             (function(i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;

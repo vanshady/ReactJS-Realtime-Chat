@@ -77,7 +77,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var preloadedState = JSON.parse(window.__PRELOADED_STATE__);
+	var preloadedState = window.__PRELOADED_STATE__;
 	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_chat.chatMiddleware)(_redux.createStore);
 	var store = createStoreWithMiddleware(_index2.default, preloadedState);
 	

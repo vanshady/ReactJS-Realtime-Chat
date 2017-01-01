@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import startChat, { chatMiddleware } from './chat';
 import reducers from './reducers/index';
 
-const preloadedState = JSON.parse(window.__PRELOADED_STATE__);
+const preloadedState = window.__PRELOADED_STATE__;
 const createStoreWithMiddleware = applyMiddleware(chatMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducers, preloadedState);
 
