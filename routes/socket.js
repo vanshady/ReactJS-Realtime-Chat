@@ -5,6 +5,7 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
 const client = redis.createClient(process.env.REDIS_URL);
+
 client.on('error', (err) => {
   console.log('Error ' + err);
 });
@@ -39,24 +40,19 @@ module.exports = (socket) => {
   .then(num => client.multi()
     .rpush('chatroom:public:users', `Guest ${parseFloat(num, 10) + 1}`)
     .lrange('chatroom:public:users', 0, -1)
-    .lrange('chatroom:public:messages', 0, -1)
     .execAsync()
     .then(replies => ({
       paramName: `Guest ${parseFloat(num, 10) + 1}`,
       paramUsers: replies[1],
-      paramMessages: replies[2],
     })))
   .then((res) => {
-    const { paramName, paramUsers, paramMessages } = res;
+    const { paramName, paramUsers } = res;
     let name = paramName;
     const users = paramUsers;
-    let messages = paramMessages;
-    messages = messages.map(item => JSON.parse(item));
 
     // send the new user their name and a list of users
     socket.emit('init', {
       name,
-      messages,
       users,
     });
 
@@ -91,8 +87,6 @@ module.exports = (socket) => {
         oldName,
         newName,
       });
-
-      // fn(true);
     });
 
     // clean up when a user leaves, and broadcast it to other users

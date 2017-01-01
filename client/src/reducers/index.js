@@ -23,7 +23,7 @@ export default function reducer(state = { name: '', users: [], messages: [] }, a
 
   switch (action.type) {
     case INIT:
-      return { name: action.name, users: action.users, messages: action.messages };
+      return { ...state, name: action.name, users: action.users };
     case SET_NAME:
       return { ...state, name: action.name };
     case ADD_MESSAGE:

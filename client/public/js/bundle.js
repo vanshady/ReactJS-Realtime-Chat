@@ -24603,7 +24603,7 @@
 	
 	  switch (action.type) {
 	    case _message.INIT:
-	      return { name: action.name, users: action.users, messages: action.messages };
+	      return _extends({}, state, { name: action.name, users: action.users });
 	    case _message.SET_NAME:
 	      return _extends({}, state, { name: action.name });
 	    case _message.ADD_MESSAGE:
