@@ -4,9 +4,12 @@
   "scripts": {
     "dist": "webpack --config webpack.prod.config.js -p",
     "dev": "webpack --config webpack.dev.config.js -d --watch",
-    "start": "nodemon index.js --exec babel-node"
+    "start": "nodemon lib/index.js --exec babel-node",
+    "build": "babel lib -d dist --presets=es2015,react,stage-2 --plugins=transform-object-rest-spread",
+    "serve": "node dist/index.js"
   },
   "dependencies": {
+    "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -35,5 +38,8 @@
     "watchify": "^3.8.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
+  },
+  "engines": {
+    "node": "6.9.1"
   }
 }

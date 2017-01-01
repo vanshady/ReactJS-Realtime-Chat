@@ -817,6 +817,10 @@ babel-types@^6.13.0, babel-types@^6.16.0, babel-types@^6.18.0, babel-types@^6.19
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
+babel@^6.5.2:
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/babel/-/babel-6.5.2.tgz#59140607438270920047ff56f02b2d8630c2d129"
+
 babelify@^7.3.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/babelify/-/babelify-7.3.0.tgz#aa56aede7067fd7bd549666ee16dc285087e88e5"
