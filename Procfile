@@ -1,1 +1,1 @@
-web: babel-node index.js --presets=es2015,react,stage-2
+web: $(npm bin)/babel-node index.js
