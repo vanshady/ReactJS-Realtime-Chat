@@ -38,10 +38,16 @@ const config = {
         NODE_ENV: '"production"',
       },
     }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: true,
       compress: {
         warnings: false,
+        drop_console: true,
       },
+      comments: false,
     }),
   ],
 };
