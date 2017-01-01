@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Message = require('components/Message.jsx');
+import Message from './Message.jsx';
 
 let shouldScrollBottom;
 

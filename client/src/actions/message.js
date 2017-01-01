@@ -1,5 +1,3 @@
-import store from '../store';
-
 export const INIT = 'init';
 export const ADD_MESSAGE = 'add-message';
 export const ADD_USER = 'add-user';
@@ -29,8 +27,8 @@ export function deleteUser(user) {
   return { type: DELETE_USER, user };
 }
 
-export function changeName(name) {
-  return { type: CHANGE_NAME, oldName: store.getState().name, newName: name };
+export function changeName(oldName, newName) {
+  return { type: CHANGE_NAME, oldName, newName };
 }
 
 export function othersChangeName(oldName, newName) {

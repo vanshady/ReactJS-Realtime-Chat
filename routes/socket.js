@@ -78,7 +78,6 @@ module.exports = (socket) => {
 
     // validate a user's name change, and broadcast it on success
     socket.on('change:name', (data) => {
-      console.log(data);
       const oldName = name;
       const newName = data.newName;
       if (oldName.substr(0, 5) === 'Guest') {

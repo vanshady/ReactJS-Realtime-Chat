@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeName } from 'actions/message';
-
-import UsersList from 'components/UsersList.jsx';
-import MessageList from 'components/MessageList.jsx';
-import MessageForm from 'components/MessageForm.jsx';
-import ChangeNameForm from 'components/ChangeNameForm.jsx';
+import UsersList from './UsersList.jsx';
+import MessageList from './MessageList.jsx';
+import MessageForm from './MessageForm.jsx';
+import ChangeNameForm from './ChangeNameForm.jsx';
 
 class ChatApp extends Component {
   render() {
@@ -41,17 +39,10 @@ class ChatApp extends Component {
 
 ChatApp.propTypes = {
   name: React.PropTypes.string.isRequired,
-  changeName: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   name: state.name,
 });
 
-const mapDispatchToProps = dispatch => ({
-  changeName: (name) => {
-    dispatch(changeName(name));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatApp);
+export default connect(mapStateToProps)(ChatApp);

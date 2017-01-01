@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeName } from 'actions/message';
+import { changeName } from '../actions/message';
 
 const ChangeNameForm = React.createClass({
   propTypes: {
+    name: React.PropTypes.string.isRequired,
     changeName: React.PropTypes.func.isRequired,
   },
 
@@ -18,7 +19,7 @@ const ChangeNameForm = React.createClass({
   handleSubmit(e) {
     e.preventDefault();
     const newName = this.state.newName;
-    this.props.changeName(newName);
+    this.props.changeName(this.props.name, newName);
     this.setState({ newName: '' });
   },
 
@@ -44,8 +45,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeName: (name) => {
-    dispatch(changeName(name));
+  changeName: (oldName, newName) => {
+    dispatch(changeName(oldName, newName));
   },
 });
 

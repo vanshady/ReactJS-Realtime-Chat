@@ -65,21 +65,27 @@
 	
 	var _ChatApp2 = _interopRequireDefault(_ChatApp);
 	
+	var _redux = __webpack_require__(/*! redux */ 189);
+	
 	var _chat = __webpack_require__(/*! ./chat */ 220);
 	
 	var _chat2 = _interopRequireDefault(_chat);
 	
-	var _store = __webpack_require__(/*! ./store */ 218);
+	var _index = __webpack_require__(/*! ./reducers/index */ 219);
 	
-	var _store2 = _interopRequireDefault(_store);
+	var _index2 = _interopRequireDefault(_index);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _chat2.default)(_store2.default);
+	var preloadedState = JSON.parse(window.__PRELOADED_STATE__);
+	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_chat.chatMiddleware)(_redux.createStore);
+	var store = createStoreWithMiddleware(_index2.default, preloadedState);
+	
+	(0, _chat2.default)(store);
 	
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
-	  { store: _store2.default },
+	  { store: store },
 	  _react2.default.createElement(_ChatApp2.default, null)
 	), document.getElementById('app'));
 	
@@ -24390,21 +24396,19 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _message = __webpack_require__(/*! actions/message */ 217);
-	
-	var _UsersList = __webpack_require__(/*! components/UsersList.jsx */ 270);
+	var _UsersList = __webpack_require__(/*! ./UsersList.jsx */ 270);
 	
 	var _UsersList2 = _interopRequireDefault(_UsersList);
 	
-	var _MessageList = __webpack_require__(/*! components/MessageList.jsx */ 271);
+	var _MessageList = __webpack_require__(/*! ./MessageList.jsx */ 271);
 	
 	var _MessageList2 = _interopRequireDefault(_MessageList);
 	
-	var _MessageForm = __webpack_require__(/*! components/MessageForm.jsx */ 273);
+	var _MessageForm = __webpack_require__(/*! ./MessageForm.jsx */ 273);
 	
 	var _MessageForm2 = _interopRequireDefault(_MessageForm);
 	
-	var _ChangeNameForm = __webpack_require__(/*! components/ChangeNameForm.jsx */ 274);
+	var _ChangeNameForm = __webpack_require__(/*! ./ChangeNameForm.jsx */ 274);
 	
 	var _ChangeNameForm2 = _interopRequireDefault(_ChangeNameForm);
 	
@@ -24484,8 +24488,7 @@
 	}(_react.Component);
 	
 	ChatApp.propTypes = {
-	  name: _react2.default.PropTypes.string.isRequired,
-	  changeName: _react2.default.PropTypes.func.isRequired
+	  name: _react2.default.PropTypes.string.isRequired
 	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
@@ -24494,15 +24497,7 @@
 	  };
 	};
 	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    changeName: function changeName(name) {
-	      dispatch((0, _message.changeName)(name));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ChatApp);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(ChatApp);
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ChatApp.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -24520,7 +24515,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.OTHERS_CHANGE_NAME = exports.CHANGE_NAME = exports.DELETE_USER = exports.SEND_MESSAGE = exports.SET_NAME = exports.ADD_USER = exports.ADD_MESSAGE = exports.INIT = undefined;
 	exports.init = init;
 	exports.addMessage = addMessage;
 	exports.sendMessage = sendMessage;
@@ -24528,13 +24522,6 @@
 	exports.deleteUser = deleteUser;
 	exports.changeName = changeName;
 	exports.othersChangeName = othersChangeName;
-	
-	var _store = __webpack_require__(/*! ../store */ 218);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	var INIT = exports.INIT = 'init';
 	var ADD_MESSAGE = exports.ADD_MESSAGE = 'add-message';
 	var ADD_USER = exports.ADD_USER = 'add-user';
@@ -24564,8 +24551,8 @@
 	  return { type: DELETE_USER, user: user };
 	}
 	
-	function changeName(name) {
-	  return { type: CHANGE_NAME, oldName: _store2.default.getState().name, newName: name };
+	function changeName(oldName, newName) {
+	  return { type: CHANGE_NAME, oldName: oldName, newName: newName };
 	}
 	
 	function othersChangeName(oldName, newName) {
@@ -24575,39 +24562,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "message.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 218 */
-/*!*****************************!*\
-  !*** ./client/src/store.js ***!
-  \*****************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _redux = __webpack_require__(/*! redux */ 189);
-	
-	var _index = __webpack_require__(/*! ./reducers/index */ 219);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _chat = __webpack_require__(/*! ./chat */ 220);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var preloadedState = JSON.parse(window.__PRELOADED_STATE__);
-	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_chat.chatMiddleware)(_redux.createStore);
-	var store = createStoreWithMiddleware(_index2.default, preloadedState);
-	
-	exports.default = store;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/vanshady/Code/ReactJS-Realtime-Chat/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "store.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
+/* 218 */,
 /* 219 */
 /*!**************************************!*\
   !*** ./client/src/reducers/index.js ***!
@@ -24626,7 +24581,7 @@
 	
 	exports.default = reducer;
 	
-	var _message = __webpack_require__(/*! actions/message */ 217);
+	var _message = __webpack_require__(/*! ../actions/message.js */ 217);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -24640,7 +24595,10 @@
 	  return [].concat(_toConsumableArray(users.slice(0, index)), _toConsumableArray(users.slice(index + 1)));
 	}
 	
-	function reducer(state, action) {
+	function reducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { name: '', users: [], messages: [] };
+	  var action = arguments[1];
+	
 	  if (!action) return _extends({}, state);
 	
 	  switch (action.type) {
@@ -24723,11 +24681,7 @@
 	
 	var _socket2 = _interopRequireDefault(_socket);
 	
-	var _jakobmattssonClientCookies = __webpack_require__(/*! jakobmattsson-client-cookies */ 269);
-	
-	var _jakobmattssonClientCookies2 = _interopRequireDefault(_jakobmattssonClientCookies);
-	
-	var _message = __webpack_require__(/*! actions/message */ 217);
+	var _message = __webpack_require__(/*! ./actions/message */ 217);
 	
 	var actions = _interopRequireWildcard(_message);
 	
@@ -24736,7 +24690,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var socket = null;
-	
+	// import Cookies from 'jakobmattsson-client-cookies';
 	function chatMiddleware(store) {
 	  return function (next) {
 	    return function (action) {
@@ -24746,7 +24700,7 @@
 	        } else if (action.type === actions.CHANGE_NAME) {
 	          var newName = action.newName;
 	
-	          _jakobmattssonClientCookies2.default.set('name', newName);
+	          // Cookies.set('name', newName);
 	          socket.emit('change:name', { newName: newName });
 	        }
 	      }
@@ -32851,125 +32805,7 @@
 
 
 /***/ },
-/* 269 */
-/*!***************************************************!*\
-  !*** ./~/jakobmattsson-client-cookies/cookies.js ***!
-  \***************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	 * Cookies.js - 0.1.7
-	 * Tuesday, May 08 2012 @ 6:29 PM EST
-	 *
-	 * Copyright (c) 2012, Scott Hamper
-	 * Licensed under the MIT license,
-	 * http://www.opensource.org/licenses/MIT
-	 */
-	(function (document, undefined) {
-	    'use strict';
-	    
-	    var Cookies = function () {
-	        if (arguments.length === 1) {
-	            return Cookies.get(arguments[0]);
-	        } else {
-	            return Cookies.set(arguments[0], arguments[1], arguments[2]);
-	        }
-	    };
-	    
-	    Cookies.get = function (key) {
-	        if (document.cookie !== Cookies._cacheString) {
-	            Cookies._populateCache();
-	        }
-	        
-	        return Cookies._cache[key];
-	    };
-	    
-	    Cookies.defaults = {
-	        path: '/'
-	    };
-	    
-	    Cookies.set = function (key, value, options) {
-	        var options = {
-	            path: options && options.path || Cookies.defaults.path,
-	            domain: options && options.domain || Cookies.defaults.domain,
-	            expires: options && options.expires || Cookies.defaults.expires,
-	            secure: options && options.secure !== undefined ? options.secure : Cookies.defaults.secure
-	        };
-	        
-	        if (value === undefined) {
-	            options.expires = -1;
-	            value = '';
-	        }
-	        
-	        switch (typeof options.expires) {
-	            // If a number is passed in, make it work like 'max-age'
-	            case 'number': options.expires = new Date(new Date().getTime() + options.expires * 1000); break;
-	            // Allow multiple string formats for dates
-	            case 'string': options.expires = new Date(options.expires); break;
-	        }
-	    
-	        // Escape only the characters that should be escaped as defined by RFC6265
-	        var cookieString = encodeURIComponent(key) + '=' + JSON.stringify(value).replace(/[^!#-+\--:<-[\]-~]/g, encodeURIComponent);
-	        cookieString += options.path ? ';path=' + options.path : '';
-	        cookieString += options.domain ? ';domain=' + options.domain : '';
-	        cookieString += options.expires ? ';expires=' + options.expires.toGMTString() : '';
-	        cookieString += options.secure ? ';secure' : '';
-	        
-	        document.cookie = cookieString;
-	        
-	        return Cookies;
-	    };
-	    
-	    Cookies.expire = function (key, options) {
-	        return Cookies.set(key, undefined, options);
-	    };
-	    
-	    Cookies._populateCache = function () {
-	        Cookies._cache = {};
-	        Cookies._cacheString = document.cookie;
-	        
-	        var cookiesArray = Cookies._cacheString.split('; ');
-	        for (var i = 0; i < cookiesArray.length; i++) {
-	            // The cookie value can contain a '=', so cannot use 'split'
-	            var separatorIndex = cookiesArray[i].indexOf('=');
-	            var key = decodeURIComponent(cookiesArray[i].substr(0, separatorIndex));
-	            var value = decodeURIComponent(cookiesArray[i].substr(separatorIndex + 1));
-	            
-	            // The first instance of a key in the document.cookie string
-	            // is the most locally scoped cookie with the specified key.
-	            // The value of this key will be sent to the web server, so we'll
-	            // just ignore any other instances of the key.
-	            if (Cookies._cache[key] === undefined) {
-	                try { value = JSON.parse(value); } catch (ex) { }
-	                Cookies._cache[key] = value;
-	            }
-	        }
-	    };
-	    
-	    Cookies.enabled = (function () {
-	        var isEnabled = Cookies.set('cookies.js', 1).get('cookies.js') === 1;
-	        Cookies.expire('cookies.js');
-	        return isEnabled;
-	    })();
-	    
-	    // AMD support
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_RESULT__ = function () { return Cookies; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    // CommonJS and Node.js module support.
-	    } else if (typeof exports !== 'undefined') {
-	        // Support Node.js specific `module.exports` (which can be a function)
-	        if (typeof module != 'undefined' && module.exports) {
-	            exports = module.exports = Cookies;
-	        }
-	        // But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
-	        exports.Cookies = Cookies;
-	    } else {
-	        window.Cookies = Cookies;
-	    }
-	    
-	})(document);
-
-/***/ },
+/* 269 */,
 /* 270 */
 /*!*********************************************!*\
   !*** ./client/src/components/UsersList.jsx ***!
@@ -33054,9 +32890,11 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _Message = __webpack_require__(/*! ./Message.jsx */ 272);
 	
-	var Message = __webpack_require__(/*! components/Message.jsx */ 272);
+	var _Message2 = _interopRequireDefault(_Message);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var shouldScrollBottom = void 0;
 	
@@ -33081,7 +32919,7 @@
 	      'ul',
 	      { className: 'messages', id: 'messageList' },
 	      this.props.messages.map(function (message, i) {
-	        return _react2.default.createElement(Message, {
+	        return _react2.default.createElement(_Message2.default, {
 	          key: i,
 	          user: message.user,
 	          text: message.text
@@ -33166,7 +33004,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _message = __webpack_require__(/*! actions/message */ 217);
+	var _message = __webpack_require__(/*! ../actions/message */ 217);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -33249,7 +33087,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _message = __webpack_require__(/*! actions/message */ 217);
+	var _message = __webpack_require__(/*! ../actions/message */ 217);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -33257,6 +33095,7 @@
 	  displayName: 'ChangeNameForm',
 	
 	  propTypes: {
+	    name: _react2.default.PropTypes.string.isRequired,
 	    changeName: _react2.default.PropTypes.func.isRequired
 	  },
 	
@@ -33269,7 +33108,7 @@
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
 	    var newName = this.state.newName;
-	    this.props.changeName(newName);
+	    this.props.changeName(this.props.name, newName);
 	    this.setState({ newName: '' });
 	  },
 	  render: function render() {
@@ -33299,8 +33138,8 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    changeName: function changeName(name) {
-	      dispatch((0, _message.changeName)(name));
+	    changeName: function changeName(oldName, newName) {
+	      dispatch((0, _message.changeName)(oldName, newName));
 	    }
 	  };
 	};

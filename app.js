@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const socket = require('./routes/socket.js');
+const handleRender = require('./routes/handleRender');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'development') {
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 }
+
+app.use(handleRender);
 
 /* Socket.io Communication */
 const io = require('socket.io').listen(server);

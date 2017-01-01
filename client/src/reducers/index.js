@@ -1,5 +1,5 @@
 import { INIT, SET_NAME, ADD_MESSAGE, SEND_MESSAGE, CHANGE_NAME,
-  OTHERS_CHANGE_NAME, ADD_USER, DELETE_USER } from 'actions/message';
+  OTHERS_CHANGE_NAME, ADD_USER, DELETE_USER } from '../actions/message.js';
 
 function changeUser(users, oldName, newName) {
   const index = users.indexOf(oldName);
@@ -18,7 +18,7 @@ function deleteUser(users, name) {
   ];
 }
 
-export default function reducer(state, action) {
+export default function reducer(state = { name: '', users: [], messages: [] }, action) {
   if (!action) return { ...state };
 
   switch (action.type) {

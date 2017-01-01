@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
-import Cookies from 'jakobmattsson-client-cookies';
-import * as actions from 'actions/message';
+// import Cookies from 'jakobmattsson-client-cookies';
+import * as actions from './actions/message';
 
 let socket = null;
 
@@ -12,7 +12,7 @@ export function chatMiddleware(store) {
       } else if (action.type === actions.CHANGE_NAME) {
         const newName = action.newName;
 
-        Cookies.set('name', newName);
+        // Cookies.set('name', newName);
         socket.emit('change:name', { newName });
       }
     }

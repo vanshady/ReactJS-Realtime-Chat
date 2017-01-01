@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sendMessage } from 'actions/message';
+import { sendMessage } from '../actions/message';
 
 const MessageForm = React.createClass({
   propTypes: {
