@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const CLIENT_DIR = path.resolve(__dirname, 'client/src');
-const DIST_DIR = path.resolve(__dirname, 'client/public/js');
+const CLIENT_DIR = path.resolve(__dirname, 'src');
+const DIST_DIR = path.resolve(__dirname, 'public/js');
 
 const config = {
   entry: CLIENT_DIR + '/index.jsx',

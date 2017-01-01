@@ -1,5 +1,5 @@
 {
-  "name": "reactjs-socket-io-chat-app",
+  "name": "fullstack-chatapp",
   "version": "0.7.0",
   "scripts": {
     "dist": "webpack --config webpack.prod.config.js -p",
