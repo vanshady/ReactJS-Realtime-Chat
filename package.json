@@ -4,9 +4,7 @@
   "scripts": {
     "dist": "webpack --config webpack.prod.config.js -p",
     "dev": "webpack --config webpack.dev.config.js -d --watch",
-    "start": "nodemon index.js --exec babel-node",
-    "build": "babel ./index.js -d dist",
-    "serve": "node dist/index.js"
+    "start": "nodemon index.js --exec babel-node"
   },
   "dependencies": {
     "babel-cli": "^6.18.0",
