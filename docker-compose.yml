@@ -1,0 +1,30 @@
+nginx:
+    build: ./nginx
+    links:
+        - chatapp1:chatapp1
+        - chatapp2:chatapp2
+        - chatapp3:chatapp3
+    ports:
+        - "80:80"
+chatapp1:
+    build: ./chatapp
+    links:
+        - redis
+    ports:
+        - "3000"
+chatapp2:
+    build: ./chatapp
+    links:
+        - redis
+    ports:
+        - "3000"
+chatapp3:
+    build: ./chatapp
+    links:
+        - redis
+    ports:
+        - "3000"
+redis:
+    image: redis
+    ports:
+        - "6379"
