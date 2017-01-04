@@ -4,7 +4,6 @@ const bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-console.log(process.env.REDIS_PORT_6379_TCP_ADDR + ':' + process.env.REDIS_PORT_6379_TCP_PORT);
 const client = redis.createClient('6379', 'redis');
 // const client = redis.createClient(process.env.REDIS_URL);
 

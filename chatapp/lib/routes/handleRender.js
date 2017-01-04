@@ -51,7 +51,6 @@ function renderFullPage(html, preloadedState) {
 }
 
 module.exports = function handleRender(req, res) {
-  console.log(process.env.REDIS_PORT_6379_TCP_ADDR + ':' + process.env.REDIS_PORT_6379_TCP_PORT);
   const client = redis.createClient('6379', 'redis');
 //   const client = redis.createClient(process.env.REDIS_URL);
 

@@ -19,16 +19,16 @@ services:
         links:
             - redis
         ports:
-            - "3000"
+            - "3001:3000"
     chatapp2:
         build: ./chatapp
         links:
             - redis
         ports:
-            - "3000"
+            - "3002:3000"
     chatapp3:
         build: ./chatapp
         links:
             - redis
         ports:
-            - "3000"
+            - "3003:3000"

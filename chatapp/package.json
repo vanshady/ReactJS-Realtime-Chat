@@ -4,9 +4,10 @@
   "scripts": {
     "dist": "webpack --config webpack.prod.config.js -p",
     "dev": "webpack --config webpack.dev.config.js -d --watch",
-    "start": "nodemon lib/index.js --exec babel-node",
+    "devstart": "nodemon lib/index.js --exec babel-node",
     "build": "babel lib -d dist --presets=es2015,react,stage-2 --plugins=transform-object-rest-spread",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.js",
+    "start": "babel-node lib/index.js"
   },
   "dependencies": {
     "babel": "^6.5.2",
