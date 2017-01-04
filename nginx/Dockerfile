@@ -1,8 +1,8 @@
 # Set nginx base image
-FROM nginx
+FROM nginx:latest
 
 # File Author / Maintainer
 MAINTAINER Minwei Xu
 
 # Copy custom configuration file from the current directory
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
