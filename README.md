@@ -8,6 +8,8 @@ Thanks to the below blog posts and documentations:
 
 [Server Rendering](http://redux.js.org/docs/recipes/ServerRendering.html)
 
+[A sample Docker workflow with Nginx, Node.js and Redis](http://anandmanisankar.com/posts/docker-container-nginx-node-redis-example/)
+
 ## Keywords
 
 Docker, Nginx, redis, docker-compose
@@ -16,7 +18,9 @@ server-side rendering, cookies
 
 ## Running it
 
-### First, grab the dependencies:
+Simply run `docker-compose build && docker-compose up` and go to `localhost:8080`
+
+### To run the Node server, first, grab the dependencies:
 
 `yarn` to install all the dependencies by yarn
 
@@ -30,7 +34,7 @@ server-side rendering, cookies
 
 `npm run serve` to start the backend server
 
-### And navigate to `localhost:3000` and chat !
+### And navigate to `localhost:3000` and chat!
 
 ### For development, run:
 
