@@ -12,7 +12,7 @@ services:
             - chatapp2:chatapp2
             - chatapp3:chatapp3
         ports:
-            - "8080:80"
+            - "80:80"
 
     chatapp1:
         build: ./chatapp
