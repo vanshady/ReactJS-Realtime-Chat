@@ -10,9 +10,11 @@ Thanks to the below blog posts and documentations:
 
 [A sample Docker workflow with Nginx, Node.js and Redis](http://anandmanisankar.com/posts/docker-container-nginx-node-redis-example/)
 
+[Having subdomain of namecheap domain point to droplet](https://www.digitalocean.com/community/questions/having-subdomain-of-namecheap-domain-point-to-droplet)
+
 ## Keywords
 
-Docker, Nginx, redis, docker-compose
+Docker, Nginx, redis, docker-compose, Ubuntu, DigitalOcean
 React, Redux, Socket.io, ES6, Babel, webpack, express,
 server-side rendering, cookies
 
