@@ -39,11 +39,11 @@ const decrGuest = () => {
 module.exports = (socket) => {
   client.multi().incr('guest_num').execAsync()
   .then(num => client.multi()
-    .rpush('chatroom:public:users', `Guest ${parseFloat(num, 10) + 1}`)
+    .rpush('chatroom:public:users', `Guest ${num}`)
     .lrange('chatroom:public:users', 0, -1)
     .execAsync()
     .then(replies => ({
-      paramName: `Guest ${parseFloat(num, 10) + 1}`,
+      paramName: `Guest ${num}`,
       paramUsers: replies[1],
     })))
   .then((res) => {
