@@ -23,6 +23,7 @@
     "body-parser": "^1.15.2",
     "browserify": "^13.1.1",
     "cors": "^2.8.1",
+    "es6-template-strings": "^2.0.1",
     "express": "^4.14.0",
     "jakobmattsson-client-cookies": "^0.1.5",
     "nodemon": "^1.11.0",
