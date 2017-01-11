@@ -22,6 +22,7 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "browserify": "^13.1.1",
+    "compression": "^1.6.2",
     "cors": "^2.8.1",
     "es6-template-strings": "^2.0.1",
     "express": "^4.14.0",
